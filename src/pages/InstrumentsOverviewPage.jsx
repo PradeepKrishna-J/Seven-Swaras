@@ -1,9 +1,9 @@
 import { Link, useOutletContext } from 'react-router-dom'
 import { INSTRUMENTS } from '../data.js'
-import { ChevronIcon } from '../icons.jsx'
+import { InstrumentIcon, ChevronIcon } from '../icons.jsx'
 import { Breadcrumbs } from '../components/Breadcrumbs.jsx'
 import { PageHero } from '../components/PageHero.jsx'
-import { HERO_IMAGES, instrumentHeroImage } from '../heroImages.js'
+import { HERO_IMAGES } from '../heroImages.js'
 import { useSeo } from '../useSeo.js'
 
 export default function InstrumentsOverviewPage() {
@@ -11,7 +11,7 @@ export default function InstrumentsOverviewPage() {
 
   useSeo({
     title: 'Instruments We Teach',
-    description: 'Explore Keyboard, Guitar, Piano, Violin, Drums, Vocals, Flute and Music Theory classes at Seven Swaras Music Academy — Carnatic, Western and Fusion styles, taught online and offline in Chennai.',
+    description: 'Explore Keyboard, Guitar, Drums, Western Vocals, Carnatic Vocals and Carnatic Mandolin classes at Seven Swaras Music Academy, taught online and offline in Chennai.',
   })
 
   return (
@@ -22,7 +22,7 @@ export default function InstrumentsOverviewPage() {
         image={HERO_IMAGES.classroom}
         eyebrow="Instruments We Teach"
         title="Find Your Instrument"
-        subtitle="Seven core instruments across Carnatic, Western and Fusion styles, each with its own structured curriculum and certified faculty."
+        subtitle="Six core instruments across Carnatic and Western styles, each with its own structured curriculum."
       >
         <button className="ssma-btn ssma-btn-amber" onClick={() => onBookDemo()}>Book a Free Demo</button>
       </PageHero>
@@ -31,12 +31,12 @@ export default function InstrumentsOverviewPage() {
         <div className="ssma-teacher-grid">
           {INSTRUMENTS.map((inst) => (
             <Link key={inst.key} to={`/instruments/${inst.key}`} className="ssma-teacher-row">
-              <span className="ssma-teacher-avatar">
-                <img src={instrumentHeroImage(inst)} alt={`${inst.name} teacher`} loading="lazy" />
+              <span className="ssma-teacher-avatar ssma-teacher-avatar-icon">
+                <InstrumentIcon instrumentKey={inst.key} size={28} color="#312E81" />
               </span>
               <span className="ssma-teacher-info">
-                <strong>{inst.name} Teachers</strong>
-                <span>{inst.teacher} · {inst.experience}</span>
+                <strong>{inst.name}</strong>
+                <span>{inst.desc}</span>
               </span>
               <span className="ssma-teacher-arrow"><ChevronIcon /></span>
             </Link>
@@ -53,19 +53,19 @@ export default function InstrumentsOverviewPage() {
           <div className="ssi-advantage-item">
             <div>
               <h4>Just starting out, especially with a young child?</h4>
-              <p>Keyboard and Music Theory are the gentlest entry points — visual layouts, instant feedback, and a curriculum that transfers directly into piano, guitar or vocal training later.</p>
+              <p>Keyboard is the gentlest entry point — visual layout, instant feedback, and a curriculum that transfers directly into other instruments later.</p>
             </div>
           </div>
           <div className="ssi-advantage-item">
             <div>
               <h4>Want to perform solo, at gatherings or on stage?</h4>
-              <p>Guitar and Vocal are the most versatile for solo performance, covering both Carnatic and contemporary Western repertoire.</p>
+              <p>Guitar and Western Vocals are the most versatile for solo performance, covering pop, rock and contemporary repertoire.</p>
             </div>
           </div>
           <div className="ssi-advantage-item">
             <div>
               <h4>Drawn to Indian classical training specifically?</h4>
-              <p>Violin and Vocal both offer a full Carnatic track alongside Western styles, taught by faculty with Carnatic grading credentials.</p>
+              <p>Carnatic Vocals and Carnatic Mandolin both build a full classical foundation, from varnams to kritis.</p>
             </div>
           </div>
           <div className="ssi-advantage-item">
@@ -79,7 +79,7 @@ export default function InstrumentsOverviewPage() {
 
       <section className="ssi-cta-banner">
         <p>Not Sure Which Instrument Is Right For You?</p>
-        <h3>Book a Free Demo and Ask Our Faculty Directly</h3>
+        <h3>Book a Free Demo and Ask Us Directly</h3>
         <div className="ssi-cta-row ssi-cta-row-center">
           <button className="ssma-btn ssma-btn-amber" onClick={() => onBookDemo()}>Book a FREE Demo</button>
         </div>

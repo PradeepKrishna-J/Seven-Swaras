@@ -9,7 +9,7 @@ import { useSeo } from '../useSeo.js'
 export default function ResourcesOverviewPage() {
   useSeo({
     title: 'Resources',
-    description: 'How enrolment works, frequently asked questions, contact details and how to become a tutor at Seven Swaras Music Academy.',
+    description: 'How enrolment works, frequently asked questions, and contact details for Seven Swaras Music Academy.',
   })
 
   return (
@@ -24,7 +24,7 @@ export default function ResourcesOverviewPage() {
       />
 
       <section className="ssma-section">
-        <div className="ssma-why-grid">
+        <div className="ssma-why-grid ssma-why-grid-3">
           {RESOURCE_LINKS.map((r) => (
             <Link key={r.slug} to={`/resources/${r.slug}`} className="ssma-why-card">
               <h3>{r.label}</h3>

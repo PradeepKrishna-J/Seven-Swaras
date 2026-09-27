@@ -188,3 +188,76 @@ export function ChevronIcon({ size = 20, color = '#312E81', direction = 'right' 
   )
 }
 
+/* ------------------------------------------------------------------ */
+/* Per-instrument vector icons                                         */
+/* ------------------------------------------------------------------ */
+
+function KeyboardIcon({ size = 18, color = '#312E81' }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+      <rect x="2.5" y="7" width="19" height="11" rx="1.5" stroke={color} strokeWidth="1.6" />
+      <path d="M6 7v6.5M9.5 7v6.5M13 7v6.5M16.5 7v6.5" stroke={color} strokeWidth="1.6" strokeLinecap="round" />
+    </svg>
+  )
+}
+
+function GuitarIcon({ size = 18, color = '#312E81' }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+      <circle cx="9.5" cy="16" r="5.2" stroke={color} strokeWidth="1.6" />
+      <circle cx="9.5" cy="16" r="2" stroke={color} strokeWidth="1.6" />
+      <path d="M12 12.3L17 4" stroke={color} strokeWidth="1.6" strokeLinecap="round" />
+      <circle cx="16.3" cy="3.6" r="0.9" fill={color} />
+      <circle cx="18.3" cy="5" r="0.9" fill={color} />
+    </svg>
+  )
+}
+
+function DrumsIcon({ size = 18, color = '#312E81' }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+      <circle cx="8" cy="15" r="5" stroke={color} strokeWidth="1.6" />
+      <circle cx="16" cy="15" r="5" stroke={color} strokeWidth="1.6" />
+      <circle cx="12" cy="8.5" r="4.3" stroke={color} strokeWidth="1.6" />
+    </svg>
+  )
+}
+
+function MicIcon({ size = 18, color = '#312E81' }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+      <rect x="9" y="3" width="6" height="11" rx="3" stroke={color} strokeWidth="1.6" />
+      <path d="M6 11v1a6 6 0 0 0 12 0v-1" stroke={color} strokeWidth="1.6" strokeLinecap="round" />
+      <line x1="12" y1="18" x2="12" y2="21.5" stroke={color} strokeWidth="1.6" strokeLinecap="round" />
+      <line x1="8.5" y1="21.5" x2="15.5" y2="21.5" stroke={color} strokeWidth="1.6" strokeLinecap="round" />
+    </svg>
+  )
+}
+
+function MandolinIcon({ size = 18, color = '#312E81' }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+      <path d="M11 21c-4-1-6.5-4.5-6.5-8.5C4.5 8 7.5 5 11 5" stroke={color} strokeWidth="1.6" strokeLinecap="round" />
+      <path d="M11 21c4-1 6.5-4.5 6.5-8.5C17.5 8 14.5 5 11 5" stroke={color} strokeWidth="1.6" strokeLinecap="round" />
+      <line x1="11" y1="5" x2="11" y2="2" stroke={color} strokeWidth="1.6" strokeLinecap="round" />
+      <path d="M8.5 2.2c0-.9 4.9-.9 4.9 0" stroke={color} strokeWidth="1.6" />
+      <ellipse cx="11" cy="14" rx="1.8" ry="2.4" stroke={color} strokeWidth="1.4" />
+    </svg>
+  )
+}
+
+const INSTRUMENT_ICONS = {
+  keyboard: KeyboardIcon,
+  guitar: GuitarIcon,
+  drums: DrumsIcon,
+  'western-vocals': MicIcon,
+  'carnatic-vocals': MicIcon,
+  'carnatic-mandolin': MandolinIcon,
+}
+
+export function InstrumentIcon({ instrumentKey, size = 18, color = '#312E81' }) {
+  const Icon = INSTRUMENT_ICONS[instrumentKey]
+  if (!Icon) return null
+  return <Icon size={size} color={color} />
+}
+

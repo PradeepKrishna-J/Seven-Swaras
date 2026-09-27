@@ -31,19 +31,19 @@ export default function JoinUsPage() {
           <div className="ssi-advantage-item">
             <div>
               <h4>On the day of your demo</h4>
-              <p>Arrive (or log in, for online) five minutes early. Wear comfortable clothing you can move in — this matters especially for drums, guitar and vocal. No prior preparation is required; your teacher leads the entire session.</p>
+              <p>Arrive (or log in, for online) five minutes early. Wear comfortable clothing you can move in — this matters especially for drums. No prior preparation is required; we lead the entire session.</p>
             </div>
           </div>
           <div className="ssi-advantage-item">
             <div>
               <h4>What to bring — in person</h4>
-              <p>A notebook for notes is helpful but not required. If you already own your instrument, bring it along; if not, our practice rooms are equipped with keyboards, guitars, a drum kit and violins for the demo and early lessons.</p>
+              <p>A notebook for notes is helpful but not required. If you already own your instrument, bring it along; if not, our practice rooms are equipped with keyboards, guitars and a drum kit for the demo and early lessons.</p>
             </div>
           </div>
           <div className="ssi-advantage-item">
             <div>
               <h4>What to bring — online</h4>
-              <p>A laptop or tablet (rather than a phone) gives your teacher a much clearer view of your hands and posture. A quiet room and a stable internet connection (2 Mbps or higher) make the biggest difference to class quality.</p>
+              <p>A laptop or tablet (rather than a phone) gives us a much clearer view of your hands and posture. A quiet room and a stable internet connection (2 Mbps or higher) make the biggest difference to class quality.</p>
             </div>
           </div>
           <div className="ssi-advantage-item">

@@ -10,7 +10,7 @@ export default function LiveBandOverviewPage() {
 
   useSeo({
     title: 'Live Band',
-    description: 'Book Seven Swaras Music Academy’s faculty and senior students for live music at corporate events, birthday parties, weddings, and concerts in Chennai.',
+    description: 'Book Seven Swaras Music Academy’s performers and senior students for live music at corporate events, birthday parties, weddings, and concerts in Chennai.',
   })
 
   return (
@@ -21,7 +21,7 @@ export default function LiveBandOverviewPage() {
         image={HERO_IMAGES.liveBand}
         eyebrow="Live Band"
         title="Music for Your Events"
-        subtitle="Beyond the classroom, our faculty and senior students perform live at corporate events, birthday parties, weddings and concerts across Chennai."
+        subtitle="Beyond the classroom, our performers and senior students perform live at corporate events, birthday parties, weddings and concerts across Chennai."
       >
         <button className="ssma-btn ssma-btn-amber" onClick={() => onBookDemo()}>Book Our Band</button>
       </PageHero>
@@ -41,7 +41,7 @@ export default function LiveBandOverviewPage() {
       <section className="ssma-section ssma-section-tint">
         <div className="ssma-section-head">
           <h2>See Our Performances</h2>
-          <p>A sample of student and faculty performances from our YouTube channel.</p>
+          <p>A sample of student and performer highlights from our YouTube channel.</p>
         </div>
 
         <div className="ssma-gallery-grid">

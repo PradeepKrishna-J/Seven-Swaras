@@ -403,7 +403,7 @@ section, .ssma-nav, .ssma-footer { box-sizing: border-box; }
   .ssma-hamburger { display: flex; }
 }
 
-/* ---------- instrument teacher list ("Looking for the Best Music Teacher?") ---------- */
+/* ---------- instrument list rows ---------- */
 
 .ssma-teacher-grid {
   display: grid;
@@ -443,6 +443,7 @@ section, .ssma-nav, .ssma-footer { box-sizing: border-box; }
   transform: scale(1.06);
 }
 .ssma-teacher-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.ssma-teacher-avatar-icon { display: flex; align-items: center; justify-content: center; background: #F3F1FB; }
 .ssma-teacher-info { display: flex; flex-direction: column; gap: 3px; flex: 1; min-width: 0; }
 .ssma-teacher-info strong { font-size: 17px; color: #1E1B4B; transition: color 0.2s ease; }
 .ssma-teacher-row:hover .ssma-teacher-info strong { color: #312E81; }
@@ -454,48 +455,6 @@ section, .ssma-nav, .ssma-footer { box-sizing: border-box; }
   transition: opacity 0.2s ease, transform 0.2s ease;
 }
 .ssma-teacher-row:hover .ssma-teacher-arrow { opacity: 1; transform: translateX(0); }
-
-/* ---------- expert teachers ---------- */
-
-.ssma-experts-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 28px;
-}
-@media (max-width: 768px) {
-  .ssma-experts-grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 520px) {
-  .ssma-experts-grid { grid-template-columns: 1fr; }
-}
-.ssma-expert-card {
-  background: #fff;
-  border: 1px solid rgba(49, 46, 129, 0.08);
-  border-radius: 16px;
-  padding: 24px 20px;
-  text-align: center;
-  box-shadow: 0 1px 2px rgba(30, 27, 75, 0.03), 0 8px 20px -6px rgba(30, 27, 75, 0.08);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-.ssma-expert-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 4px 8px rgba(30, 27, 75, 0.06), 0 20px 32px -8px rgba(49, 46, 129, 0.2);
-}
-.ssma-expert-avatar {
-  display: block;
-  width: 96px;
-  height: 96px;
-  margin: 0 auto 14px;
-  border-radius: 50%;
-  overflow: hidden;
-  border: 3px solid #F3F1FB;
-  transition: border-color 0.25s ease, transform 0.25s ease;
-}
-.ssma-expert-card:hover .ssma-expert-avatar { border-color: #F59E0B; transform: scale(1.05); }
-.ssma-expert-avatar img { width: 100%; height: 100%; object-fit: cover; }
-.ssma-expert-card strong { display: block; font-size: 16.5px; color: #1E1B4B; margin-bottom: 4px; }
-.ssma-expert-card p { font-size: 13.5px; color: #312E81; font-weight: 600; margin: 0 0 4px; }
-.ssma-expert-meta { font-size: 12px; color: #8582a1; }
 
 /* ---------- FAQ ---------- */
 
@@ -685,29 +644,22 @@ section, .ssma-nav, .ssma-footer { box-sizing: border-box; }
 
 /* ---------- testimonials ---------- */
 
-.ssma-marquee-viewport {
-  overflow: hidden;
-  margin-bottom: 24px;
+.ssma-testimonial-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
 }
-.ssma-marquee-row {
-  display: flex;
-  width: max-content;
-  animation: ssmaMarquee 40s linear infinite;
+@media (max-width: 900px) {
+  .ssma-testimonial-row { grid-template-columns: repeat(2, 1fr); }
 }
-.ssma-marquee-row-rev { animation-direction: reverse; }
-.ssma-marquee-row:hover { animation-play-state: paused; }
-@keyframes ssmaMarquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+@media (max-width: 520px) {
+  .ssma-testimonial-row { grid-template-columns: 1fr; }
 }
 .ssma-testimonial-card {
   background: #fff;
   border: 1px solid rgba(49, 46, 129, 0.08);
   border-radius: 14px;
-  padding: 14px 16px;
-  width: 196px;
-  flex: 0 0 196px;
-  margin-right: 14px;
+  padding: 18px 18px 20px;
   box-shadow: 0 1px 2px rgba(30, 27, 75, 0.03), 0 6px 16px -6px rgba(30, 27, 75, 0.08);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }

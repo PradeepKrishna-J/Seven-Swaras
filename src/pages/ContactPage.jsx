@@ -25,10 +25,6 @@ export default function ContactPage() {
       postalCode: '600099',
       addressCountry: 'IN',
     },
-    openingHoursSpecification: [
-      { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], opens: '08:00', closes: '21:00' },
-      { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Saturday', 'Sunday'], opens: '08:00', closes: '14:00' },
-    ],
   }
 
   return (

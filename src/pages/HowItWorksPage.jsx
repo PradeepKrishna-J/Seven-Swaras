@@ -10,12 +10,12 @@ const STEPS = [
     desc: 'Fill out the demo form on our website, message us on WhatsApp, or call our academy directly. Tell us the instrument you’re interested in and your preferred schedule — weekend, weekday or online.',
   },
   {
-    title: 'Meet Your Teacher',
-    desc: 'We match you with a faculty member for your instrument and schedule a free, no-commitment 30–45 minute demo class. You’ll get a real feel for our teaching style, not just a sales pitch.',
+    title: 'Attend Your Free Demo',
+    desc: 'We schedule a free, no-commitment 30–45 minute demo class for your instrument. You’ll get a real feel for our approach, not just a sales pitch.',
   },
   {
     title: 'Get a Personalised Learning Plan',
-    desc: 'After the demo, your teacher discusses your goals — casual hobby, exam preparation, or performance — and outlines a curriculum path suited to your level and pace.',
+    desc: 'After the demo, we discuss your goals — casual hobby, skill-building, or performance — and outline a curriculum path suited to your level and pace.',
   },
   {
     title: 'Choose Your Batch and Join',
@@ -23,7 +23,7 @@ const STEPS = [
   },
   {
     title: 'Track Your Progress',
-    desc: 'Regular monthly recitals, recorded session access (for online students), and optional Trinity or ABRSM grade exams give you clear, visible milestones as you progress.',
+    desc: 'Regular monthly recitals and recorded session access (for online students) give you clear, visible milestones as you progress.',
   },
 ]
 

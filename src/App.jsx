@@ -11,7 +11,7 @@ import HowItWorksPage from './pages/HowItWorksPage.jsx'
 import FaqPage from './pages/FaqPage.jsx'
 import ContactPage from './pages/ContactPage.jsx'
 import JoinUsPage from './pages/JoinUsPage.jsx'
-import BecomeATutorPage from './pages/BecomeATutorPage.jsx'
+import InstrumentSalesPage from './pages/InstrumentSalesPage.jsx'
 import LiveBandOverviewPage from './pages/LiveBandOverviewPage.jsx'
 import LiveBandDetailPage from './pages/LiveBandDetailPage.jsx'
 import AboutPage from './pages/AboutPage.jsx'
@@ -111,6 +111,7 @@ export default function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/instruments" element={<InstrumentsOverviewPage />} />
           <Route path="/instruments/:key" element={<InstrumentPage />} />
+          <Route path="/instrument-sales" element={<InstrumentSalesPage />} />
           <Route path="/classes" element={<ClassesOverviewPage />} />
           <Route path="/classes/:slug" element={<ClassDetailPage />} />
           <Route path="/resources" element={<ResourcesOverviewPage />} />
@@ -118,13 +119,13 @@ export default function App() {
           <Route path="/resources/faqs" element={<FaqPage />} />
           <Route path="/resources/contact" element={<ContactPage />} />
           <Route path="/resources/join-us" element={<JoinUsPage />} />
-          <Route path="/resources/become-a-tutor" element={<BecomeATutorPage />} />
           <Route path="/live-band" element={<LiveBandOverviewPage />} />
           <Route path="/live-band/:slug" element={<LiveBandDetailPage />} />
           <Route path="/services" element={<Navigate to="/live-band" replace />} />
           <Route path="/about-us" element={<AboutPage />} />
           <Route path="/blog" element={<BlogListPage />} />
           <Route path="/blog/:slug" element={<BlogArticlePage />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
       </Routes>
 

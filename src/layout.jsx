@@ -130,6 +130,7 @@ export function Footer({ onBookDemo }) {
           <h4>Explore</h4>
           <Link to="/">Home</Link>
           <Link to="/instruments">Instruments</Link>
+          <Link to="/instrument-sales">Instrument Sales</Link>
           <Link to="/classes">Classes</Link>
           <Link to="/live-band">Live Band</Link>
           <Link to="/blog">Blog</Link>
@@ -143,8 +144,7 @@ export function Footer({ onBookDemo }) {
           <Link to="/resources/how-it-works">How It Works</Link>
           <Link to="/resources/faqs">FAQs</Link>
           <Link to="/resources/contact">Contact Us</Link>
-          <Link to="/resources/become-a-tutor">Become a Tutor</Link>
-          <Link to="/resources/join-us">Join Us (Students)</Link>
+          <Link to="/resources/join-us">Join Us</Link>
           <h4 className="ssma-footer-h4-spaced">Reach Us</h4>
           <p>49 Hrishikesa Garden, Dayalu Nagar, Chennai – 600099</p>
           <p>+91 93616 23134, +91 90030 66873</p>
@@ -153,7 +153,7 @@ export function Footer({ onBookDemo }) {
       </div>
 
       <div className="ssma-footer-bottom">
-        <p>© 2025 Seven Swaras Music Academy. All rights reserved. | Made with ♪ in Chennai</p>
+        <p>© 2025 Seven Swaras Music Academy. All rights reserved. | Made in Chennai</p>
         <p><a href="#">Privacy Policy</a> · <a href="#">Terms of Use</a></p>
       </div>
     </footer>
@@ -352,14 +352,14 @@ export function ContactCard() {
         <ClockIcon />
         <div>
           <strong>Timings</strong>
-          <p>Mon–Fri: 8:00 AM – 9:00 PM<br />Sat–Sun: 8:00 AM – 2:00 PM</p>
+          <p>Round-the-clock flexible timings</p>
         </div>
       </div>
       <div className="ssma-info-row">
         <GlobeIcon />
         <div>
           <strong>Online Classes</strong>
-          <p>7:00 AM – 10:00 PM IST (All days)</p>
+          <p>Flexible schedules available 24/7</p>
         </div>
       </div>
 

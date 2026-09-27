@@ -3,16 +3,13 @@ import { Link } from 'react-router-dom'
 import { useOutletContext } from 'react-router-dom'
 import hero from '../assets/hero.png'
 import {
-  INSTRUMENTS, TEACHERS, FAQS, WHY_STATS, SWARAS, CLASSES, BLOG_POSTS,
-  TESTIMONIALS_ROW1, TESTIMONIALS_ROW2, VIDEOS,
+  INSTRUMENTS, FAQS, CLASSES, BLOG_POSTS, TESTIMONIALS, VIDEOS,
 } from '../data.js'
 import {
-  CalendarIcon, LaptopNoteIcon, ChevronIcon,
-  GraduationCapIcon, UsersIcon, GlobeIcon, CertificateIcon, StarIcon, TrophyIcon, MapPinIcon,
+  CalendarIcon, LaptopNoteIcon, StarIcon, TrophyIcon, MapPinIcon, GraduationCapIcon, InstrumentIcon,
 } from '../icons.jsx'
 import { SCROLL_TARGET_KEY } from '../useSectionNav.js'
 import { useSeo } from '../useSeo.js'
-import { instrumentHeroImage } from '../heroImages.js'
 
 /* ------------------------------------------------------------------ */
 /* Hero                                                                 */
@@ -27,7 +24,7 @@ function Hero({ onBookDemo }) {
           <p className="ssma-eyebrow">Chennai's Most Loved Music School</p>
           <h1 className="ssma-hero-title">Where Every Note Tells a Story</h1>
           <p className="ssma-hero-sub">
-            Learn Carnatic, Western &amp; Fusion music — in person or online — from India's finest certified instructors.
+            Learn Carnatic, Western &amp; Fusion music — in person or online — with a structured, proven curriculum.
           </p>
           <div className="ssma-hero-ctas">
             <a
@@ -56,28 +53,23 @@ function Hero({ onBookDemo }) {
 }
 
 /* ------------------------------------------------------------------ */
-/* Instruments — "Looking for the best music teacher?"                 */
+/* Instruments                                                          */
 /* ------------------------------------------------------------------ */
 
 function InstrumentsSection() {
   return (
     <section id="instruments" className="ssma-section">
       <div className="ssma-section-head">
-        <h2>Looking for the Best Music Teacher?</h2>
-        <p>Learn from our certified faculty across every instrument at Seven Swaras Music Academy</p>
+        <h2>Explore Our Instruments</h2>
+        <p>Six instruments, one structured curriculum, at Seven Swaras Music Academy.</p>
       </div>
 
-      <div className="ssma-teacher-grid">
-        {INSTRUMENTS.slice(0, 6).map((inst) => (
-          <Link key={inst.key} to={`/instruments/${inst.key}`} className="ssma-teacher-row">
-            <span className="ssma-teacher-avatar">
-              <img src={instrumentHeroImage(inst)} alt={`${inst.name} teacher`} loading="lazy" />
-            </span>
-            <span className="ssma-teacher-info">
-              <strong>{inst.name} Teachers</strong>
-              <span>{inst.teacher} · {inst.experience}</span>
-            </span>
-            <span className="ssma-teacher-arrow"><ChevronIcon /></span>
+      <div className="ssma-why-grid ssma-why-grid-3">
+        {INSTRUMENTS.map((inst) => (
+          <Link key={inst.key} to={`/instruments/${inst.key}`} className="ssma-why-card">
+            <span className="ssma-why-icon"><InstrumentIcon instrumentKey={inst.key} size={26} color="#fff" /></span>
+            <h3>{inst.name}</h3>
+            <p>{inst.desc}</p>
           </Link>
         ))}
       </div>
@@ -85,34 +77,6 @@ function InstrumentsSection() {
       <p style={{ textAlign: 'center', marginTop: 32 }}>
         <Link to="/instruments" className="ssma-amber-link-inline">View All {INSTRUMENTS.length} Instruments →</Link>
       </p>
-    </section>
-  )
-}
-
-/* ------------------------------------------------------------------ */
-/* Expert Teachers                                                      */
-/* ------------------------------------------------------------------ */
-
-function ExpertTeachers() {
-  return (
-    <section className="ssma-section ssma-section-tint">
-      <div className="ssma-section-head">
-        <h2>Meet Our Expert Teachers</h2>
-        <p>Certified, experienced faculty who make every class personal.</p>
-      </div>
-
-      <div className="ssma-experts-grid">
-        {TEACHERS.map((t) => (
-          <div className="ssma-expert-card" key={t.name}>
-            <span className="ssma-expert-avatar">
-              <img src={t.photo} alt={t.name} loading="lazy" />
-            </span>
-            <strong>{t.name}</strong>
-            <p>{t.role}</p>
-            <span className="ssma-expert-meta">{t.meta}</span>
-          </div>
-        ))}
-      </div>
     </section>
   )
 }
@@ -165,51 +129,7 @@ function ClassSchedule({ onBookDemo }) {
 }
 
 /* ------------------------------------------------------------------ */
-/* Why choose                                                          */
-/* ------------------------------------------------------------------ */
-
-const WHY_ICONS = {
-  graduation: GraduationCapIcon,
-  users: UsersIcon,
-  globe: GlobeIcon,
-  certificate: CertificateIcon,
-}
-
-function WhyChoose() {
-  return (
-    <section className="ssma-section">
-      <div className="ssma-section-head">
-        <h2>Why Seven Swaras?</h2>
-        <p>We don't just teach notes. We build musicians.</p>
-      </div>
-
-      <div className="ssma-why-grid">
-        {WHY_STATS.map((s) => {
-          const Icon = WHY_ICONS[s.icon]
-          return (
-            <div className="ssma-why-card" key={s.title}>
-              <span className="ssma-why-icon"><Icon size={26} /></span>
-              <h3>{s.title}</h3>
-              <p>{s.desc}</p>
-            </div>
-          )
-        })}
-      </div>
-
-      <div className="ssma-swara-bar">
-        <div className="ssma-swara-words">
-          {SWARAS.map((s, i) => (
-            <span key={s} style={{ animationDelay: `${i * 200}ms` }}>{s}</span>
-          ))}
-        </div>
-        <p>The Seven Swaras. Your journey through all 7 starts here.</p>
-      </div>
-    </section>
-  )
-}
-
-/* ------------------------------------------------------------------ */
-/* Testimonials marquee                                                 */
+/* Testimonials                                                        */
 /* ------------------------------------------------------------------ */
 
 function TestimonialCard({ t }) {
@@ -227,23 +147,14 @@ function TestimonialCard({ t }) {
 }
 
 function Testimonials() {
-  const row1 = [...TESTIMONIALS_ROW1, ...TESTIMONIALS_ROW1]
-  const row2 = [...TESTIMONIALS_ROW2, ...TESTIMONIALS_ROW2]
   return (
     <section id="testimonials" className="ssma-section ssma-section-tint">
       <div className="ssma-section-head">
         <h2>What Our Students Say</h2>
       </div>
 
-      <div className="ssma-marquee-viewport">
-        <div className="ssma-marquee-row ssma-marquee-row-rev">
-          {row1.map((t, i) => <TestimonialCard t={t} key={i} />)}
-        </div>
-      </div>
-      <div className="ssma-marquee-viewport">
-        <div className="ssma-marquee-row">
-          {row2.map((t, i) => <TestimonialCard t={t} key={i} />)}
-        </div>
+      <div className="ssma-testimonial-row">
+        {TESTIMONIALS.map((t) => <TestimonialCard t={t} key={t.name} />)}
       </div>
     </section>
   )
@@ -295,7 +206,7 @@ function FAQSection() {
 }
 
 /* ------------------------------------------------------------------ */
-/* About / Services / Blog teasers                                     */
+/* About / Live Band / Blog teasers                                    */
 /* ------------------------------------------------------------------ */
 
 function AboutTeaser() {
@@ -304,9 +215,9 @@ function AboutTeaser() {
       <div className="ssma-section-head">
         <h2>Since 2014, in Chennai</h2>
         <p>
-          Seven Swaras Music Academy started with a single classroom and a belief that structured, patient teaching
-          builds musicians faster than raw talent alone. Today that same philosophy reaches 500+ students across
-          Chennai and 10+ countries online.
+          Seven Swaras Music Academy started with a single classroom and a belief that a structured, patient
+          approach builds musicians faster than raw talent alone. Today that same approach reaches 500+ students
+          across Chennai and 10+ countries online.
         </p>
         <p style={{ marginTop: 16 }}>
           <Link to="/about-us" className="ssma-amber-link-inline">Read Our Full Story →</Link>
@@ -322,8 +233,8 @@ function LiveBandTeaser({ onBookDemo }) {
       <div className="ssma-section-head">
         <h2>Live Band for Your Events</h2>
         <p>
-          Beyond the classroom, our faculty and senior students perform live at corporate events, birthday parties,
-          weddings and concerts across Chennai.
+          Beyond the classroom, our performers and senior students perform live at corporate events, birthday
+          parties, weddings and concerts across Chennai.
         </p>
       </div>
       <div className="ssi-cta-row ssi-cta-row-center">
@@ -340,7 +251,7 @@ function BlogTeaser() {
     <section className="ssma-section ssma-section-tint">
       <div className="ssma-section-head">
         <h2>From Our Blog</h2>
-        <p>Notes on our academy and the instruments we teach — written by our faculty.</p>
+        <p>Notes on our academy and the instruments we offer.</p>
       </div>
       <div className="ssma-blog-grid">
         {latest.map((post) => (
@@ -428,7 +339,7 @@ export default function HomePage() {
 
   useSeo({
     title: "Chennai's Premier Music School",
-    description: 'Learn Carnatic, Western and Fusion music online and offline in Chennai at Seven Swaras Music Academy. Keyboard, Guitar, Piano, Violin, Drums, Vocal and Music Theory classes. Book a free demo today.',
+    description: 'Learn Carnatic, Western and Fusion music online and offline in Chennai at Seven Swaras Music Academy. Keyboard, Guitar, Drums, Western Vocals, Carnatic Vocals and Carnatic Mandolin classes. Book a free demo today.',
   })
 
   useEffect(() => {
@@ -447,9 +358,7 @@ export default function HomePage() {
     <>
       <Hero onBookDemo={onBookDemo} />
       <InstrumentsSection />
-      <ExpertTeachers />
       <ClassSchedule onBookDemo={onBookDemo} />
-      <WhyChoose />
       <AboutTeaser />
       <Testimonials />
       <LiveBandTeaser onBookDemo={onBookDemo} />

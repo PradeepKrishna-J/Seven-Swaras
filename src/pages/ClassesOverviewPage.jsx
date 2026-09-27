@@ -1,6 +1,6 @@
 import { Link, useOutletContext } from 'react-router-dom'
-import { CLASSES, EXAM_TRACKS } from '../data.js'
-import { CalendarIcon, LaptopNoteIcon, CheckIcon, CertificateIcon } from '../icons.jsx'
+import { CLASSES } from '../data.js'
+import { CalendarIcon, LaptopNoteIcon, CheckIcon } from '../icons.jsx'
 import { Breadcrumbs } from '../components/Breadcrumbs.jsx'
 import { PageHero } from '../components/PageHero.jsx'
 import { HERO_IMAGES } from '../heroImages.js'
@@ -16,8 +16,8 @@ export default function ClassesOverviewPage() {
   const { onBookDemo } = useOutletContext()
 
   useSeo({
-    title: 'Classes — Schedules & Grade Exams',
-    description: 'Compare Seven Swaras Music Academy’s Weekend, Weekday and Online schedules, plus Trinity, ABRSM and Rockschool grade exam tracks.',
+    title: 'Classes — Schedules',
+    description: 'Compare Seven Swaras Music Academy’s Weekend, Weekday and Online schedules and find the one that fits your life.',
   })
 
   return (
@@ -28,7 +28,7 @@ export default function ClassesOverviewPage() {
         image={HERO_IMAGES.classroom}
         eyebrow="Classes"
         title="Find Your Perfect Schedule"
-        subtitle="Flexible batches designed around your life, plus graded exam tracks to benchmark your progress."
+        subtitle="Flexible batches designed around your life, not the other way around."
       >
         <button className="ssma-btn ssma-btn-amber" onClick={() => onBookDemo()}>Book a Free Demo</button>
       </PageHero>
@@ -67,34 +67,12 @@ export default function ClassesOverviewPage() {
 
       <section className="ssma-section ssma-section-tint">
         <div className="ssma-section-head">
-          <h2>Grade Exams &amp; Curriculums</h2>
-          <p>Benchmark your progress with an internationally recognised exam board.</p>
-        </div>
-
-        <div className="ssma-schedule-grid">
-          {EXAM_TRACKS.map((t) => (
-            <div className="ssma-schedule-card ssma-card-indigo-top" key={t.slug}>
-              <CertificateIcon size={32} color="#312E81" />
-              <h3>{t.name}</h3>
-              <p className="ssma-schedule-desc">{t.tagline}</p>
-              <p className="ssma-schedule-levels">{t.levels}</p>
-              <div className="ssma-card-ctas">
-                <Link className="ssma-btn ssma-btn-indigo" to={`/classes/${t.slug}`}>View Full Details</Link>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="ssma-section">
-        <div className="ssma-section-head">
           <h2>Not Sure Which Fits You?</h2>
           <p>
             Weekend Warriors suits anyone with a packed weekday routine who wants two focused sessions.
-            The Daily Practice Program suits students preparing for an exam or performance on a deadline.
+            The Daily Practice Program suits students working toward a performance on a deadline.
             Live Online Classes suit anyone outside Chennai, or anyone who simply prefers learning from home —
-            all three follow the same graded curriculum, so switching between them later is always possible.
-            Whichever schedule you choose, you can layer on a Trinity, ABRSM or Rockschool exam track whenever you're ready.
+            all three follow the same structured curriculum, so switching between them later is always possible.
           </p>
         </div>
       </section>

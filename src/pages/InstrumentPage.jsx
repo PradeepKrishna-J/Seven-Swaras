@@ -1,7 +1,6 @@
 import { Link, Navigate, useOutletContext, useParams } from 'react-router-dom'
 import { INSTRUMENTS } from '../data.js'
-import { useSectionNav } from '../useSectionNav.js'
-import { WhatsAppIcon, NoteIcon } from '../icons.jsx'
+import { WhatsAppIcon, NoteIcon, InstrumentIcon } from '../icons.jsx'
 import { Breadcrumbs } from '../components/Breadcrumbs.jsx'
 import { PageHero } from '../components/PageHero.jsx'
 import { instrumentHeroImage } from '../heroImages.js'
@@ -19,17 +18,16 @@ function waLink(name) {
 export default function InstrumentPage() {
   const { key } = useParams()
   const { onBookDemo } = useOutletContext()
-  const goToSection = useSectionNav()
   const instrument = INSTRUMENTS.find((i) => i.key === key)
 
   useSeo({
     title: instrument ? `${instrument.name} Classes` : 'Instruments',
-    description: instrument ? `Live 1-to-1 online and offline ${instrument.name} classes in Chennai — ${instrument.desc.toLowerCase()}. Certified faculty, Trinity & ABRSM aligned training.` : undefined,
+    description: instrument ? `Live 1-to-1 online and offline ${instrument.name} classes in Chennai — ${instrument.desc.toLowerCase()}.` : undefined,
   })
 
   if (!instrument) return <Navigate to="/instruments" replace />
 
-  const { name, desc, highlights, genres, teachers } = instrument
+  const { name, desc, highlights, genres } = instrument
   // Reuse the exact same image URL everywhere on the page (CSS crops each
   // placement via object-fit) rather than re-requesting the tag at a
   // different pixel size — this photo service picks a different underlying
@@ -38,17 +36,16 @@ export default function InstrumentPage() {
   const heroImg = instrumentHeroImage(instrument)
   const stepsImg = heroImg
   const advantageImg = heroImg
-  const gradeImg = heroImg
 
   const advantages = [
-    { title: `Goal Based ${name} Lessons`, desc: `You will learn from a qualified ${name} teacher who has already done it all — grade exams, stage shows and performances. Set your goals, and your teacher will build the right lesson plan to get you there faster.` },
-    { title: 'Play Your Favourite Songs', desc: `The whole point is to enjoy the instrument. Discuss your favourite songs in ${name} with your teacher and they'll help you learn them quickly, so all you have to do is focus on practice.` },
-    { title: `Friendly ${name} Teacher`, desc: `Your ${name} teacher keeps you motivated and clears your doubts as they come up. Send recorded videos, ask for feedback, and get the support you need through your musical journey.` },
+    { title: `Goal Based ${name} Lessons`, desc: `Set your goals — grade exams, stage shows or performances — and we will build the right lesson plan to get you there faster.` },
+    { title: 'Play Your Favourite Songs', desc: `The whole point is to enjoy the instrument. Tell us your favourite songs in ${name} and we'll help you learn them quickly, so all you have to do is focus on practice.` },
+    { title: `A Supportive ${name} Journey`, desc: `Stay motivated with clear feedback at every step. Send recorded videos, ask questions, and get the support you need through your musical journey.` },
   ]
 
   const steps = [
     `Register on our website (or) WhatsApp us DEMO. We will reach out to you and schedule a FREE ${name} class.`,
-    `Meet your ${name} teacher, discuss your aspirations and get a sneak peek of a typical ${name} class.`,
+    `Attend your first ${name} session, discuss your aspirations and get a sneak peek of a typical class.`,
     `Liked the demo session? Upgrade and start your structured ${name} lessons.`,
   ]
 
@@ -62,8 +59,8 @@ export default function InstrumentPage() {
       <PageHero
         image={heroImg}
         eyebrow="Live 1 to 1"
-        title={`Online ${name} Classes`}
-        subtitle={`${desc}. Learn ${name.toLowerCase()} for all age groups from the comfort of your home with our best qualified teachers.`}
+        title={<>Online <InstrumentIcon instrumentKey={key} size={30} color="#fff" /> {name} Classes</>}
+        subtitle={`${desc}. Learn ${name.toLowerCase()} for all age groups from the comfort of your home.`}
       >
         <button className="ssma-btn ssma-btn-indigo" onClick={() => onBookDemo(name)}>Book a FREE Demo</button>
         <a className="ssma-btn ssma-btn-whatsapp" href={waLink(name)} target="_blank" rel="noreferrer">
@@ -107,7 +104,7 @@ export default function InstrumentPage() {
         </div>
         <div className="ssi-advantage-grid">
           <div className="ssi-advantage-media">
-            <img src={advantageImg} alt={`${name} student practising`} loading="lazy" />
+            <img src={advantageImg} alt={`${name} practice session`} loading="lazy" />
           </div>
           <div className="ssi-advantage-list">
             {advantages.map((a) => (
@@ -153,55 +150,15 @@ export default function InstrumentPage() {
         </div>
       </section>
 
-      {/* Teachers */}
-      <section className="ssma-section ssma-section-tint">
-        <div className="ssma-section-head">
-          <h2>Online {name} Teachers</h2>
-          <p>Meet a few of the qualified faculty teaching {name.toLowerCase()} at Seven Swaras.</p>
-        </div>
-        <div className="ssma-experts-grid">
-          {teachers.map((t) => (
-            <div className="ssma-expert-card" key={t.name}>
-              <span className="ssma-expert-avatar">
-                <img src={t.photo} alt={t.name} loading="lazy" />
-              </span>
-              <strong>{t.name}</strong>
-              <p>{t.qualification}</p>
-              <span className="ssma-expert-meta">{t.languages}</span>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Grade exams */}
-      <section className="ssma-section">
-        <div className="ssi-grade-grid">
-          <div className="ssi-grade-art">
-            <img src={gradeImg} alt={`${name} grade exam preparation`} loading="lazy" />
-          </div>
-          <div className="ssi-grade-copy">
-            <h2>Let's Get Serious — Grade Exams</h2>
-            <p className="ssi-steps-sub">Give {name} grade exams from the comfort of your home</p>
-            <p>
-              Whether you are taking your first steps or improving your skills to a higher level, graded music exams help you achieve specific milestones in your {name.toLowerCase()} journey — while learning some of the greatest songs ever written.
-            </p>
-            <p>
-              We have coached students to get certifications from Trinity College London, ABRSM and Rockschool. We take pride in helping students across Chennai and beyond earn recognised, internationally valid certifications.
-            </p>
-            <button className="ssma-btn ssma-btn-indigo" onClick={() => goToSection('classes')}>Explore Music Grades</button>
-          </div>
-        </div>
-      </section>
-
       {/* Explore other instruments */}
-      <section className="ssma-section">
+      <section className="ssma-section ssma-section-tint">
         <div className="ssma-section-head">
           <h2>Explore Other Instruments</h2>
         </div>
         <div className="ssi-other-row">
           {otherInstruments.map((i) => (
             <Link key={i.key} to={`/instruments/${i.key}`} className="ssma-chip">
-              {i.name}
+              <InstrumentIcon instrumentKey={i.key} size={16} /> {i.name}
             </Link>
           ))}
         </div>

@@ -1,19 +1,17 @@
 import { Link, useOutletContext } from 'react-router-dom'
-import { WHY_STATS, TEACHERS } from '../data.js'
-import { GraduationCapIcon, UsersIcon, GlobeIcon, CertificateIcon } from '../icons.jsx'
+import { INSTRUMENTS } from '../data.js'
+import { InstrumentIcon } from '../icons.jsx'
 import { Breadcrumbs } from '../components/Breadcrumbs.jsx'
 import { PageHero } from '../components/PageHero.jsx'
 import { HERO_IMAGES } from '../heroImages.js'
 import { useSeo } from '../useSeo.js'
-
-const WHY_ICONS = { graduation: GraduationCapIcon, users: UsersIcon, globe: GlobeIcon, certificate: CertificateIcon }
 
 export default function AboutPage() {
   const { onBookDemo } = useOutletContext()
 
   useSeo({
     title: 'About Us',
-    description: 'Seven Swaras Music Academy has taught Carnatic, Western and Fusion music in Chennai since 2014 — meet our story, our teaching philosophy and our faculty.',
+    description: 'Seven Swaras Music Academy has offered Carnatic, Western and Fusion music classes in Chennai since 2014 — read our story.',
   })
 
   return (
@@ -33,8 +31,8 @@ export default function AboutPage() {
         <div style={{ maxWidth: 760, margin: '0 auto', fontSize: 15.5, lineHeight: 1.8, color: '#3f3d4d' }}>
           <p style={{ marginBottom: 20 }}>
             Seven Swaras Music Academy started in 2014 with a single classroom in Dayalu Nagar, Chennai, and a simple
-            belief: that structured, patient teaching matters more than raw natural talent when it comes to learning
-            music. More than a decade later, that belief still shapes every class we teach, whether the student is
+            belief: that a structured, patient approach matters more than raw natural talent when it comes to
+            learning music. More than a decade later, that belief still shapes every class, whether the student is
             five years old or fifty-five.
           </p>
           <p style={{ marginBottom: 20 }}>
@@ -44,52 +42,27 @@ export default function AboutPage() {
             carefully, become real musicianship over time.
           </p>
           <p>
-            Today we teach Keyboard, Guitar, Piano, Violin, Drums, Vocals, Flute and Music Theory across Carnatic,
-            Western and Fusion styles, to more than 500 students in Chennai and across 10+ countries online — without
-            ever losing the classroom feel we started with in 2014.
+            Today we offer Keyboard, Guitar, Drums, Western Vocals, Carnatic Vocals and Carnatic Mandolin classes, to
+            more than 500 students in Chennai and across 10+ countries online — without ever losing the classroom
+            feel we started with in 2014.
           </p>
         </div>
       </section>
 
       <section className="ssma-section ssma-section-tint">
         <div className="ssma-section-head">
-          <h2>Why Seven Swaras?</h2>
-          <p>We don't just teach notes. We build musicians.</p>
+          <h2>What We Offer</h2>
+          <p>Six instruments, one structured curriculum.</p>
         </div>
-        <div className="ssma-why-grid">
-          {WHY_STATS.map((s) => {
-            const Icon = WHY_ICONS[s.icon]
-            return (
-              <div className="ssma-why-card" key={s.title}>
-                <span className="ssma-why-icon"><Icon size={26} /></span>
-                <h3>{s.title}</h3>
-                <p>{s.desc}</p>
-              </div>
-            )
-          })}
-        </div>
-      </section>
-
-      <section className="ssma-section">
-        <div className="ssma-section-head">
-          <h2>Meet Our Faculty</h2>
-          <p>Certified, experienced teachers who make every class personal.</p>
-        </div>
-        <div className="ssma-experts-grid">
-          {TEACHERS.map((t) => (
-            <div className="ssma-expert-card" key={t.name}>
-              <span className="ssma-expert-avatar">
-                <img src={t.photo} alt={t.name} loading="lazy" />
-              </span>
-              <strong>{t.name}</strong>
-              <p>{t.role}</p>
-              <span className="ssma-expert-meta">{t.meta}</span>
-            </div>
+        <div className="ssma-why-grid ssma-why-grid-3">
+          {INSTRUMENTS.map((inst) => (
+            <Link key={inst.key} to={`/instruments/${inst.key}`} className="ssma-why-card">
+              <span className="ssma-why-icon"><InstrumentIcon instrumentKey={inst.key} size={26} color="#fff" /></span>
+              <h3>{inst.name}</h3>
+              <p>{inst.desc}</p>
+            </Link>
           ))}
         </div>
-        <p style={{ textAlign: 'center', marginTop: 24 }}>
-          <Link to="/instruments" className="ssma-amber-link-inline">See every instrument our faculty teaches →</Link>
-        </p>
       </section>
 
       <section className="ssi-cta-banner">

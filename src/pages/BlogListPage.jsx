@@ -8,7 +8,7 @@ import { useSeo } from '../useSeo.js'
 export default function BlogListPage() {
   useSeo({
     title: 'Blog',
-    description: 'Notes on learning music, choosing your first instrument, and life at Seven Swaras Music Academy — written by our faculty.',
+    description: 'Notes on learning music, choosing your first instrument, and life at Seven Swaras Music Academy.',
   })
 
   return (
@@ -19,7 +19,7 @@ export default function BlogListPage() {
         image={HERO_IMAGES.classroom}
         eyebrow="Blog"
         title="From Our Blog"
-        subtitle="Notes on our academy and the instruments we teach — written by our faculty."
+        subtitle="Notes on our academy and the instruments we offer."
       />
 
       <section className="ssma-section">
