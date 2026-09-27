@@ -101,7 +101,7 @@ function ClassSchedule({ onBookDemo }) {
             <p className="ssma-schedule-time">{c.schedule}</p>
             <p className="ssma-schedule-levels">{c.levels}</p>
             <p className="ssma-schedule-desc">{c.desc}</p>
-            <div className="ssma-price-row ssma-price-blurred">
+            <div className="ssma-price-row">
               <span className="ssma-price-currency">₹</span>
               <span className="ssma-price-amount">{c.price}</span>
               <span className="ssma-price-period">/ month</span>

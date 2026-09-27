@@ -51,7 +51,7 @@ export default function ClassesOverviewPage() {
               <ul className="ssma-feature-list">
                 {c.features.map((f) => <li key={f}><CheckIcon /> {f}</li>)}
               </ul>
-              <div className="ssma-price-row ssma-price-blurred">
+              <div className="ssma-price-row">
                 <span className="ssma-price-currency">₹</span>
                 <span className="ssma-price-amount">{c.price}</span>
                 <span className="ssma-price-period">/ month</span>

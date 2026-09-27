@@ -142,7 +142,7 @@ export const CLASSES = [
     levels: 'Beginner · Intermediate · Advanced',
     desc: 'Designed for school students and working professionals who want structured, focused weekend learning without disrupting the weekday routine.',
     features: ['Small batch sizes (max 8 students)', 'Theory + practical in every session', 'Monthly progress recitals'],
-    price: '2,500',
+    price: '2,799',
     whoFor: 'This batch suits school and college students with a packed weekday timetable, and working professionals who can only commit time on weekends. Because sessions run back-to-back over the weekend rather than being spread thin through the week, students build momentum quickly and rarely lose progress to a busy weekday schedule.',
     sampleWeek: [
       'Saturday session one: Warm-up, technique drills and a review of the previous session’s piece',
@@ -165,7 +165,7 @@ export const CLASSES = [
     levels: 'All levels',
     desc: 'Full-immersion daily classes with individual attention, rapid skill building, and one-on-one guidance built into every session.',
     features: ['Morning & evening time slots', 'Dedicated practice rooms', 'Structured skill assessments'],
-    price: '4,500',
+    price: '3,999',
     whoFor: 'The Daily Practice Program is built for students working toward a performance on a deadline, homeschooled children, and adult learners who want to progress noticeably faster than a once- or twice-a-week schedule allows. Daily repetition, even in short sessions, builds muscle memory and ear training far more effectively than infrequent long sessions.',
     sampleWeek: [
       'Early week: Technique and posture correction, new material introduced',

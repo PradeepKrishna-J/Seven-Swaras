@@ -524,7 +524,6 @@ section, .ssma-nav, .ssma-footer { box-sizing: border-box; }
 .ssma-price-currency { color: #312E81; font-weight: 700; font-size: 19px; font-family: 'Playfair Display', serif; }
 .ssma-price-amount { color: #312E81; font-weight: 700; font-size: 28px; font-family: 'Playfair Display', serif; }
 .ssma-price-period { color: #8582a1; font-size: 13px; margin-left: 2px; }
-.ssma-price-blurred { filter: blur(6px); user-select: none; pointer-events: none; }
 .ssma-card-ctas { display: flex; gap: 10px; flex-wrap: wrap; }
 .ssma-card-ctas .ssma-btn { flex: 1 1 130px; font-size: 13.5px; padding: 11px 12px; white-space: nowrap; }
 .ssma-btn-outline { background: transparent; border: 1px solid #312E81; color: #312E81; }

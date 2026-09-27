@@ -47,7 +47,7 @@ export default function ClassDetailPage() {
           <p className="ssma-schedule-time" style={{ marginBottom: 4 }}>{batch.schedule}</p>
           <p className="ssma-schedule-levels">{batch.levels}</p>
         </div>
-        <div className="ssma-price-row ssma-price-blurred" style={{ justifyContent: 'center', maxWidth: 260, margin: '0 auto' }}>
+        <div className="ssma-price-row" style={{ justifyContent: 'center', maxWidth: 260, margin: '0 auto' }}>
           <span className="ssma-price-currency">₹</span>
           <span className="ssma-price-amount">{batch.price}</span>
           <span className="ssma-price-period">/ month</span>
