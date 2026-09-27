@@ -1,8 +1,9 @@
 import { useOutletContext } from 'react-router-dom'
 import { INSTRUMENTS } from '../data.js'
-import { InstrumentIcon, CheckIcon, WhatsAppIcon } from '../icons.jsx'
+import { CheckIcon, WhatsAppIcon } from '../icons.jsx'
 import { Breadcrumbs } from '../components/Breadcrumbs.jsx'
 import { PageHero } from '../components/PageHero.jsx'
+import { InstrumentRack } from '../components/InstrumentRack.jsx'
 import { HERO_IMAGES } from '../heroImages.js'
 import { useSeo } from '../useSeo.js'
 
@@ -41,15 +42,7 @@ export default function InstrumentSalesPage() {
           <h2>Available for Purchase or Rental</h2>
           <p>Every instrument we teach is also available directly through the academy.</p>
         </div>
-        <div className="ssma-why-grid ssma-why-grid-3">
-          {INSTRUMENTS.map((inst) => (
-            <div className="ssma-why-card" key={inst.key}>
-              <span className="ssma-why-icon"><InstrumentIcon instrumentKey={inst.key} size={26} color="#fff" /></span>
-              <h3>{inst.name}</h3>
-              <p>{inst.desc}</p>
-            </div>
-          ))}
-        </div>
+        <InstrumentRack instruments={INSTRUMENTS} />
       </section>
 
       <section className="ssma-section ssma-section-tint">

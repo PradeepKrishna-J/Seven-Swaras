@@ -1,8 +1,8 @@
-import { Link, useOutletContext } from 'react-router-dom'
+import { useOutletContext } from 'react-router-dom'
 import { INSTRUMENTS } from '../data.js'
-import { InstrumentIcon, ChevronIcon } from '../icons.jsx'
 import { Breadcrumbs } from '../components/Breadcrumbs.jsx'
 import { PageHero } from '../components/PageHero.jsx'
+import { InstrumentRack } from '../components/InstrumentRack.jsx'
 import { HERO_IMAGES } from '../heroImages.js'
 import { useSeo } from '../useSeo.js'
 
@@ -28,20 +28,7 @@ export default function InstrumentsOverviewPage() {
       </PageHero>
 
       <section className="ssma-section">
-        <div className="ssma-teacher-grid">
-          {INSTRUMENTS.map((inst) => (
-            <Link key={inst.key} to={`/instruments/${inst.key}`} className="ssma-teacher-row">
-              <span className="ssma-teacher-avatar ssma-teacher-avatar-icon">
-                <InstrumentIcon instrumentKey={inst.key} size={28} color="#312E81" />
-              </span>
-              <span className="ssma-teacher-info">
-                <strong>{inst.name}</strong>
-                <span>{inst.desc}</span>
-              </span>
-              <span className="ssma-teacher-arrow"><ChevronIcon /></span>
-            </Link>
-          ))}
-        </div>
+        <InstrumentRack instruments={INSTRUMENTS} />
       </section>
 
       <section className="ssma-section ssma-section-tint">

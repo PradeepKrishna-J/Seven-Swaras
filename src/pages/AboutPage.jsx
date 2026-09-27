@@ -1,8 +1,8 @@
-import { Link, useOutletContext } from 'react-router-dom'
+import { useOutletContext } from 'react-router-dom'
 import { INSTRUMENTS } from '../data.js'
-import { InstrumentIcon } from '../icons.jsx'
 import { Breadcrumbs } from '../components/Breadcrumbs.jsx'
 import { PageHero } from '../components/PageHero.jsx'
+import { InstrumentRack } from '../components/InstrumentRack.jsx'
 import { HERO_IMAGES } from '../heroImages.js'
 import { useSeo } from '../useSeo.js'
 
@@ -54,15 +54,7 @@ export default function AboutPage() {
           <h2>What We Offer</h2>
           <p>Six instruments, one structured curriculum.</p>
         </div>
-        <div className="ssma-why-grid ssma-why-grid-3">
-          {INSTRUMENTS.map((inst) => (
-            <Link key={inst.key} to={`/instruments/${inst.key}`} className="ssma-why-card">
-              <span className="ssma-why-icon"><InstrumentIcon instrumentKey={inst.key} size={26} color="#fff" /></span>
-              <h3>{inst.name}</h3>
-              <p>{inst.desc}</p>
-            </Link>
-          ))}
-        </div>
+        <InstrumentRack instruments={INSTRUMENTS} />
       </section>
 
       <section className="ssi-cta-banner">

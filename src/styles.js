@@ -407,59 +407,6 @@ section, .ssma-nav, .ssma-footer { box-sizing: border-box; }
   .ssma-hamburger { display: flex; }
 }
 
-/* ---------- instrument list rows ---------- */
-
-.ssma-teacher-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px 32px;
-}
-@media (max-width: 900px) {
-  .ssma-teacher-grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 600px) {
-  .ssma-teacher-grid { grid-template-columns: 1fr; }
-}
-.ssma-teacher-row {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 14px 16px;
-  border-radius: 14px;
-  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
-}
-.ssma-teacher-row:hover {
-  background: #F3F1FB;
-  transform: translateX(4px);
-  box-shadow: 0 8px 20px -10px rgba(49, 46, 129, 0.25);
-}
-.ssma-teacher-avatar {
-  flex: 0 0 auto;
-  width: 72px;
-  height: 72px;
-  border-radius: 50%;
-  overflow: hidden;
-  border: 2px solid transparent;
-  transition: border-color 0.2s ease, transform 0.2s ease;
-}
-.ssma-teacher-row:hover .ssma-teacher-avatar {
-  border-color: #F59E0B;
-  transform: scale(1.06);
-}
-.ssma-teacher-avatar img { width: 100%; height: 100%; object-fit: cover; }
-.ssma-teacher-avatar-icon { display: flex; align-items: center; justify-content: center; background: #F3F1FB; }
-.ssma-teacher-info { display: flex; flex-direction: column; gap: 3px; flex: 1; min-width: 0; }
-.ssma-teacher-info strong { font-size: 17px; color: #1E1B4B; transition: color 0.2s ease; }
-.ssma-teacher-row:hover .ssma-teacher-info strong { color: #312E81; }
-.ssma-teacher-info span { font-size: 12.5px; color: #8582a1; }
-.ssma-teacher-arrow {
-  flex: 0 0 auto;
-  opacity: 0;
-  transform: translateX(-6px);
-  transition: opacity 0.2s ease, transform 0.2s ease;
-}
-.ssma-teacher-row:hover .ssma-teacher-arrow { opacity: 1; transform: translateX(0); }
-
 /* ---------- FAQ ---------- */
 
 .ssma-faq-list {
@@ -618,6 +565,104 @@ section, .ssma-nav, .ssma-footer { box-sizing: border-box; }
 }
 .ssma-why-card h3 { font-size: 16.5px; color: #1E1B4B; margin: 0 0 6px; }
 .ssma-why-card p { font-size: 13px; color: #706e7c; margin: 0; }
+
+/* ---------- instrument rack (tracklist-style instrument explorer) ---------- */
+
+.ssma-rack {
+  border-top: 1px solid rgba(49, 46, 129, 0.14);
+  max-width: 920px;
+  margin: 0 auto 48px;
+}
+.ssma-rack-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 30px 44px 1fr auto 56px 20px;
+  align-items: center;
+  column-gap: 18px;
+  padding: 18px 16px 18px 20px;
+  border-bottom: 1px solid rgba(49, 46, 129, 0.14);
+  overflow: hidden;
+}
+.ssma-rack-row:hover, .ssma-rack-row:focus-visible {
+  background: linear-gradient(90deg, rgba(49, 46, 129, 0.05), rgba(245, 158, 11, 0.05));
+}
+.ssma-rack-accent {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 3px;
+  height: 0%;
+  background: linear-gradient(180deg, #312E81, #F59E0B);
+  transform: translateY(-50%);
+  transition: height 0.25s ease;
+}
+.ssma-rack-row:hover .ssma-rack-accent, .ssma-rack-row:focus-visible .ssma-rack-accent { height: 60%; }
+.ssma-rack-index {
+  font-family: 'Playfair Display', serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: #c7c5da;
+  transition: color 0.25s ease;
+}
+.ssma-rack-row:hover .ssma-rack-index { color: #F59E0B; }
+.ssma-rack-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: 1.5px solid rgba(49, 46, 129, 0.18);
+  transition: border-color 0.25s ease, background 0.25s ease;
+}
+.ssma-rack-row:hover .ssma-rack-icon { border-color: #312E81; background: #fff; }
+.ssma-rack-main { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.ssma-rack-name { font-size: 18px; font-weight: 700; color: #1E1B4B; margin: 0; }
+.ssma-rack-desc {
+  font-size: 13px;
+  color: #706e7c;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ssma-rack-tags { display: flex; gap: 6px; }
+.ssma-rack-tag {
+  font-size: 11px;
+  font-weight: 600;
+  color: #6D28D9;
+  background: rgba(109, 40, 217, 0.08);
+  border-radius: 999px;
+  padding: 4px 10px;
+  white-space: nowrap;
+  opacity: 0.6;
+  transition: opacity 0.25s ease, background 0.25s ease, color 0.25s ease;
+}
+.ssma-rack-row:hover .ssma-rack-tag { opacity: 1; background: rgba(245, 158, 11, 0.14); color: #92610a; }
+.ssma-rack-bars { display: flex; align-items: flex-end; gap: 3px; height: 20px; }
+.ssma-rack-bars i {
+  display: block;
+  width: 3px;
+  height: 6px;
+  border-radius: 2px;
+  background: #312E81;
+  opacity: 0.25;
+  transition: opacity 0.25s ease;
+}
+.ssma-rack-row:hover .ssma-rack-bars i { opacity: 1; animation: ssmaEq 0.9s ease-in-out infinite; }
+.ssma-rack-bars i:nth-child(1) { animation-delay: 0s; }
+.ssma-rack-bars i:nth-child(2) { animation-delay: 0.1s; }
+.ssma-rack-bars i:nth-child(3) { animation-delay: 0.2s; }
+.ssma-rack-bars i:nth-child(4) { animation-delay: 0.12s; }
+.ssma-rack-bars i:nth-child(5) { animation-delay: 0.05s; }
+@keyframes ssmaEq { 0%, 100% { height: 6px; } 50% { height: 20px; } }
+.ssma-rack-arrow { display: flex; color: #b8b6cc; transition: transform 0.25s ease, color 0.25s ease; }
+.ssma-rack-row:hover .ssma-rack-arrow { transform: translateX(4px); color: #312E81; }
+@media (max-width: 820px) {
+  .ssma-rack-row { grid-template-columns: 26px 38px 1fr 20px; padding: 16px 14px; }
+  .ssma-rack-tags, .ssma-rack-bars { display: none; }
+  .ssma-rack-desc { white-space: normal; }
+  .ssma-rack-name { font-size: 16.5px; }
+}
 
 .ssma-swara-bar {
   background: #312E81;

@@ -6,8 +6,9 @@ import {
   INSTRUMENTS, FAQS, CLASSES, BLOG_POSTS, TESTIMONIALS, VIDEOS,
 } from '../data.js'
 import {
-  CalendarIcon, LaptopNoteIcon, StarIcon, TrophyIcon, MapPinIcon, GraduationCapIcon, InstrumentIcon,
+  CalendarIcon, LaptopNoteIcon, StarIcon, TrophyIcon, MapPinIcon, GraduationCapIcon,
 } from '../icons.jsx'
+import { InstrumentRack } from '../components/InstrumentRack.jsx'
 import { SCROLL_TARGET_KEY } from '../useSectionNav.js'
 import { useSeo } from '../useSeo.js'
 
@@ -64,15 +65,7 @@ function InstrumentsSection() {
         <p>Six instruments, one structured curriculum, at Seven Swaras Music Academy.</p>
       </div>
 
-      <div className="ssma-why-grid ssma-why-grid-3">
-        {INSTRUMENTS.map((inst) => (
-          <Link key={inst.key} to={`/instruments/${inst.key}`} className="ssma-why-card">
-            <span className="ssma-why-icon"><InstrumentIcon instrumentKey={inst.key} size={26} color="#fff" /></span>
-            <h3>{inst.name}</h3>
-            <p>{inst.desc}</p>
-          </Link>
-        ))}
-      </div>
+      <InstrumentRack instruments={INSTRUMENTS} />
 
       <p style={{ textAlign: 'center', marginTop: 32 }}>
         <Link to="/instruments" className="ssma-amber-link-inline">View All {INSTRUMENTS.length} Instruments →</Link>
