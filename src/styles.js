@@ -150,7 +150,7 @@ section, .ssma-nav, .ssma-footer { box-sizing: border-box; }
   transition: opacity 0.18s ease, transform 0.18s ease;
   z-index: 1100;
 }
-.ssma-nav-item:hover .ssma-dropdown,
+.ssma-dropdown.is-open,
 .ssma-nav-item:focus-within .ssma-dropdown {
   opacity: 1;
   visibility: visible;
@@ -168,6 +168,9 @@ section, .ssma-nav, .ssma-footer { box-sizing: border-box; }
   padding: 0 10px;
 }
 .ssma-dropdown-group a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   padding: 7px 10px;
   border-radius: 8px;
   color: #33314a;
@@ -175,6 +178,7 @@ section, .ssma-nav, .ssma-footer { box-sizing: border-box; }
   font-weight: 500;
   white-space: nowrap;
 }
+.ssma-dropdown-group a svg { flex-shrink: 0; }
 .ssma-dropdown-group a:hover { background: #F3F1FB; color: #312E81; }
 .ssma-hamburger {
   display: none;

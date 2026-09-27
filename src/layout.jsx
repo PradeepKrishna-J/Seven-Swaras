@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useEffect, useRef, useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import logo from './assets/logo.png'
 import logoIcon from './assets/logo-icon.png'
 import { NAV_LINKS, INSTRUMENT_OPTIONS } from './data.js'
 import { HERO_IMAGES } from './heroImages.js'
 import { useSectionNav } from './useSectionNav.js'
+import { InstrumentIcon } from './icons.jsx'
 import {
   CheckIcon, WhatsAppIcon, InstagramIcon, YoutubeIcon, FacebookIcon,
   MapPinIcon, PhoneIcon, MailIcon, ClockIcon, GlobeIcon, NoteIcon,
@@ -15,6 +16,22 @@ import {
 /* ------------------------------------------------------------------ */
 
 export function Navbar({ scrolled, onBookDemo, mobileOpen, setMobileOpen }) {
+  const [openMenu, setOpenMenu] = useState(null)
+  const closeTimer = useRef(null)
+  const location = useLocation()
+
+  useEffect(() => { setOpenMenu(null) }, [location.pathname])
+  useEffect(() => () => clearTimeout(closeTimer.current), [])
+
+  const openNow = (to) => {
+    clearTimeout(closeTimer.current)
+    setOpenMenu(to)
+  }
+  const closeSoon = () => {
+    clearTimeout(closeTimer.current)
+    closeTimer.current = setTimeout(() => setOpenMenu(null), 150)
+  }
+
   return (
     <header className={`ssma-nav${scrolled ? ' ssma-nav--scrolled' : ''}`}>
       <div className="ssma-nav-inner">
@@ -28,15 +45,23 @@ export function Navbar({ scrolled, onBookDemo, mobileOpen, setMobileOpen }) {
 
         <nav className="ssma-nav-links">
           {NAV_LINKS.map((l) => (
-            <div className="ssma-nav-item" key={l.to}>
+            <div
+              className="ssma-nav-item"
+              key={l.to}
+              onMouseEnter={() => l.groups && openNow(l.to)}
+              onMouseLeave={() => l.groups && closeSoon()}
+            >
               <Link to={l.to}>{l.label}</Link>
               {l.groups && (
-                <div className="ssma-dropdown">
+                <div className={`ssma-dropdown${openMenu === l.to ? ' is-open' : ''}`}>
                   {l.groups.map((g, gi) => (
                     <div className="ssma-dropdown-group" key={gi}>
                       {g.heading && <p className="ssma-dropdown-heading">{g.heading}</p>}
                       {g.items.map((item) => (
-                        <Link key={item.to} to={item.to}>{item.label}</Link>
+                        <Link key={item.to} to={item.to} onClick={() => setOpenMenu(null)}>
+                          {item.key && <InstrumentIcon instrumentKey={item.key} size={16} />}
+                          {item.label}
+                        </Link>
                       ))}
                     </div>
                   ))}
