@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- TODO: replace https://www.your-domain-here.com with the real production domain before launch. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://www.your-domain-here.com/</loc><priority>1.0</priority></url>
+
+  <url><loc>https://www.your-domain-here.com/instruments</loc><priority>0.9</priority></url>
+  <url><loc>https://www.your-domain-here.com/instruments/keyboard</loc><priority>0.8</priority></url>
+  <url><loc>https://www.your-domain-here.com/instruments/guitar</loc><priority>0.8</priority></url>
+  <url><loc>https://www.your-domain-here.com/instruments/drums</loc><priority>0.8</priority></url>
+  <url><loc>https://www.your-domain-here.com/instruments/western-vocals</loc><priority>0.8</priority></url>
+  <url><loc>https://www.your-domain-here.com/instruments/carnatic-vocals</loc><priority>0.8</priority></url>
+  <url><loc>https://www.your-domain-here.com/instruments/carnatic-mandolin</loc><priority>0.8</priority></url>
+
+  <url><loc>https://www.your-domain-here.com/instrument-sales</loc><priority>0.7</priority></url>
+
+  <url><loc>https://www.your-domain-here.com/classes</loc><priority>0.9</priority></url>
+
+  <url><loc>https://www.your-domain-here.com/resources</loc><priority>0.7</priority></url>
+  <url><loc>https://www.your-domain-here.com/resources/how-it-works</loc><priority>0.7</priority></url>
+  <url><loc>https://www.your-domain-here.com/resources/faqs</loc><priority>0.7</priority></url>
+  <url><loc>https://www.your-domain-here.com/resources/contact</loc><priority>0.7</priority></url>
+  <url><loc>https://www.your-domain-here.com/resources/join-us</loc><priority>0.6</priority></url>
+
+  <url><loc>https://www.your-domain-here.com/live-band</loc><priority>0.7</priority></url>
+
+  <url><loc>https://www.your-domain-here.com/about-us</loc><priority>0.7</priority></url>
+
+  <url><loc>https://www.your-domain-here.com/blog</loc><priority>0.6</priority></url>
+  <url><loc>https://www.your-domain-here.com/blog/why-chennai-families-choose-seven-swaras</loc><priority>0.5</priority></url>
+  <url><loc>https://www.your-domain-here.com/blog/keyboard-perfect-first-instrument-for-kids</loc><priority>0.5</priority></url>
+  <url><loc>https://www.your-domain-here.com/blog/acoustic-vs-electric-guitar-which-first</loc><priority>0.5</priority></url>
+  <url><loc>https://www.your-domain-here.com/blog/bedroom-practice-to-stage-drums</loc><priority>0.5</priority></url>
+</urlset>
