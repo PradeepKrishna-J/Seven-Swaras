@@ -3,7 +3,6 @@ import { INSTRUMENTS } from '../data.js'
 import { Breadcrumbs } from '../components/Breadcrumbs.jsx'
 import { PageHero } from '../components/PageHero.jsx'
 import { InstrumentRack } from '../components/InstrumentRack.jsx'
-import { HERO_IMAGES } from '../heroImages.js'
 import { useSeo } from '../useSeo.js'
 
 export default function AboutPage() {
@@ -19,7 +18,6 @@ export default function AboutPage() {
       <Breadcrumbs items={[{ label: 'Home', to: '/' }, { label: 'About Us' }]} />
 
       <PageHero
-        image={HERO_IMAGES.classroom}
         eyebrow="About Us"
         title="Our Story"
         subtitle="Nurturing musical talent in Chennai since 2014."

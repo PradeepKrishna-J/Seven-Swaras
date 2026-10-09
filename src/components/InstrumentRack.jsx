@@ -5,10 +5,10 @@ export function InstrumentRack({ instruments }) {
   return (
     <div className="ssma-rack">
       {instruments.map((inst, i) => (
-        <Link key={inst.key} to={`/instruments/${inst.key}`} className="ssma-rack-row">
+        <Link key={inst.key} to={`/instruments#${inst.key}`} className="ssma-rack-row">
           <span className="ssma-rack-accent" aria-hidden="true" />
           <span className="ssma-rack-index">{String(i + 1).padStart(2, '0')}</span>
-          <span className="ssma-rack-icon"><InstrumentIcon instrumentKey={inst.key} size={22} /></span>
+          <span className="ssma-rack-icon"><InstrumentIcon instrumentKey={inst.key} size={34} /></span>
           <span className="ssma-rack-main">
             <h3 className="ssma-rack-name">{inst.name}</h3>
             <span className="ssma-rack-desc">{inst.desc}</span>
@@ -19,7 +19,7 @@ export function InstrumentRack({ instruments }) {
           <span className="ssma-rack-bars" aria-hidden="true">
             <i /><i /><i /><i /><i />
           </span>
-          <span className="ssma-rack-arrow"><ChevronIcon size={18} /></span>
+          <span className="ssma-rack-arrow"><ChevronIcon size={22} /></span>
         </Link>
       ))}
     </div>

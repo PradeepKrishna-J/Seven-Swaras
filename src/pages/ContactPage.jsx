@@ -1,7 +1,6 @@
 import { ContactCard } from '../layout.jsx'
 import { Breadcrumbs } from '../components/Breadcrumbs.jsx'
 import { PageHero } from '../components/PageHero.jsx'
-import { HERO_IMAGES } from '../heroImages.js'
 import { useSeo } from '../useSeo.js'
 import { SITE_URL } from '../seo.js'
 
@@ -32,7 +31,6 @@ export default function ContactPage() {
       <Breadcrumbs items={[{ label: 'Home', to: '/' }, { label: 'Resources', to: '/resources' }, { label: 'Contact' }]} />
 
       <PageHero
-        image={HERO_IMAGES.classroom}
         eyebrow="Resources"
         title="Visit Seven Swaras"
         subtitle="Come experience a free trial class in person — our doors are always open."

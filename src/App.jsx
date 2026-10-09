@@ -3,7 +3,6 @@ import { Route, Routes, Navigate, useLocation, useParams, Outlet } from 'react-r
 import { Navbar, StickyBanner, Footer, WhatsAppFloat, DemoModal } from './layout.jsx'
 import HomePage from './pages/HomePage.jsx'
 import InstrumentsOverviewPage from './pages/InstrumentsOverviewPage.jsx'
-import InstrumentPage from './pages/InstrumentPage.jsx'
 import ClassesOverviewPage from './pages/ClassesOverviewPage.jsx'
 import ResourcesOverviewPage from './pages/ResourcesOverviewPage.jsx'
 import HowItWorksPage from './pages/HowItWorksPage.jsx'
@@ -18,7 +17,7 @@ import BlogArticlePage from './pages/BlogArticlePage.jsx'
 import { styles } from './styles.js'
 import { SCROLL_TARGET_KEY } from './useSectionNav.js'
 
-// Old per-item pages (/classes/:slug, /live-band/:slug) now live as segments on one page
+// Old per-item pages (/instruments/:slug, /classes/:slug, /live-band/:slug) now live on one page
 function SegmentRedirect({ base }) {
   const { slug } = useParams()
   return <Navigate to={`${base}#${slug}`} replace />
@@ -66,6 +65,8 @@ export default function App() {
     onScroll()
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
+
+  useEffect(() => { setMobileOpen(false) }, [location.hash])
 
   useEffect(() => {
     setMobileOpen(false)
@@ -117,7 +118,7 @@ export default function App() {
         >
           <Route path="/" element={<HomePage />} />
           <Route path="/instruments" element={<InstrumentsOverviewPage />} />
-          <Route path="/instruments/:key" element={<InstrumentPage />} />
+          <Route path="/instruments/:slug" element={<SegmentRedirect base="/instruments" />} />
           <Route path="/instrument-sales" element={<InstrumentSalesPage />} />
           <Route path="/classes" element={<ClassesOverviewPage />} />
           <Route path="/classes/:slug" element={<SegmentRedirect base="/classes" />} />

@@ -33,7 +33,7 @@ export default function BlogArticlePage() {
     <>
       <Breadcrumbs items={[{ label: 'Home', to: '/' }, { label: 'Blog', to: '/blog' }, { label: post.title }]} />
 
-      <PageHero image={post.heroImage} eyebrow={post.tag} title={post.title} subtitle={`Seven Swaras Music Academy · ${post.readTime}`} />
+      <PageHero eyebrow={post.tag} title={post.title} subtitle={`Seven Swaras Music Academy · ${post.readTime}`} />
 
       <section className="ssma-section">
         <article className="ssma-article">

@@ -1,7 +1,6 @@
 import { FAQS } from '../data.js'
 import { Breadcrumbs } from '../components/Breadcrumbs.jsx'
 import { PageHero } from '../components/PageHero.jsx'
-import { HERO_IMAGES } from '../heroImages.js'
 import { FaqAccordion } from '../components/FaqAccordion.jsx'
 import { useSeo } from '../useSeo.js'
 
@@ -26,7 +25,6 @@ export default function FaqPage() {
       <Breadcrumbs items={[{ label: 'Home', to: '/' }, { label: 'Resources', to: '/resources' }, { label: 'FAQs' }]} />
 
       <PageHero
-        image={HERO_IMAGES.classroom}
         eyebrow="Resources"
         title="Frequently Asked Questions"
         subtitle="Everything you need to know before booking your first class."

@@ -2,20 +2,18 @@
 /* Site-wide data                                                       */
 /* ------------------------------------------------------------------ */
 
-import { HERO_IMAGES, instrumentHeroImage } from './heroImages.js'
-
 export const NAV_LINKS = [
   { label: 'Home', to: '/' },
   {
     label: 'Instruments',
     to: '/instruments',
     groups: [{ items: [
-      { label: 'Keyboard', to: '/instruments/keyboard', key: 'keyboard' },
-      { label: 'Guitar', to: '/instruments/guitar', key: 'guitar' },
-      { label: 'Drums', to: '/instruments/drums', key: 'drums' },
-      { label: 'Western Vocals', to: '/instruments/western-vocals', key: 'western-vocals' },
-      { label: 'Carnatic Vocals', to: '/instruments/carnatic-vocals', key: 'carnatic-vocals' },
-      { label: 'Carnatic Mandolin', to: '/instruments/carnatic-mandolin', key: 'carnatic-mandolin' },
+      { label: 'Keyboard', to: '/instruments#keyboard', key: 'keyboard' },
+      { label: 'Guitar', to: '/instruments#guitar', key: 'guitar' },
+      { label: 'Drums', to: '/instruments#drums', key: 'drums' },
+      { label: 'Western Vocals', to: '/instruments#western-vocals', key: 'western-vocals' },
+      { label: 'Carnatic Vocals', to: '/instruments#carnatic-vocals', key: 'carnatic-vocals' },
+      { label: 'Carnatic Mandolin', to: '/instruments#carnatic-mandolin', key: 'carnatic-mandolin' },
     ] }],
   },
   { label: 'Instrument Sales', to: '/instrument-sales' },
@@ -95,6 +93,7 @@ export const INSTRUMENTS = [
     desc: 'The gateway to harmony and melody',
     highlights: ['Beginner to advanced structured curriculum', 'Weekday, weekend & online batches available', 'Ideal first instrument for young beginners'],
     genres: ['Beginner Foundations', 'Bollywood & Film', 'Western Classical', 'Improvisation'],
+    about: 'A keyboard lays every note out in a clear, repeating pattern of white and black keys, so beginners can see how melody and harmony fit together from the very first lesson. Students learn hand position, reading, chords and two-hand coordination, building a foundation that carries over to every other instrument.',
   },
   {
     key: 'guitar',
@@ -102,6 +101,7 @@ export const INSTRUMENTS = [
     desc: 'Strum your way from campfires to concert halls',
     highlights: ['Acoustic & electric guitar covered', 'Chords, strumming and lead technique', 'Weekday, weekend & online batches available'],
     genres: ['Acoustic', 'Classical', 'Electric', 'Fingerstyle', 'Rock & Pop'],
+    about: 'From the warm strum of an acoustic to the bite of an electric, the guitar is one of the most versatile instruments you can learn. Lessons cover chords, strumming patterns, fingerstyle and lead technique, so you can accompany yourself singing or step out for a solo.',
   },
   {
     key: 'drums',
@@ -109,6 +109,7 @@ export const INSTRUMENTS = [
     desc: 'Feel the heartbeat of every song',
     highlights: ['Rhythm, timing & fills from day one', 'Dedicated practice room access', 'Weekday, weekend & online batches available'],
     genres: ['Rock', 'Jazz', 'Fusion', 'Latin'],
+    about: 'The drum kit drives the groove of almost every song you know. Students start with grip and stick control on a practice pad, then build hand-and-foot independence on a full kit before moving on to rock, jazz, fusion and Latin grooves.',
   },
   {
     key: 'western-vocals',
@@ -116,6 +117,7 @@ export const INSTRUMENTS = [
     desc: 'Contemporary voice technique for pop, rock and playback styles',
     highlights: ['Breathing, pitch & voice culture training', 'Pop, rock & playback repertoire', 'Weekday, weekend & online batches available'],
     genres: ['Pop', 'Rock', 'Playback & Film', 'Jazz'],
+    about: 'Your voice is the one instrument you always carry with you. Western vocal training focuses on breath support, pitch accuracy, range and tone, then applies them to pop, rock, jazz and film songs, with plenty of practice performing in front of others.',
   },
   {
     key: 'carnatic-vocals',
@@ -123,6 +125,7 @@ export const INSTRUMENTS = [
     desc: 'Find your voice in the Carnatic classical tradition',
     highlights: ['Traditional Carnatic vocal training', 'Breathing, pitch & voice culture training', 'Weekday, weekend & online batches available'],
     genres: ['Varnams', 'Kritis', 'Ragam Tanam Pallavi', 'Devotional'],
+    about: 'Carnatic music is the classical tradition of South India, built on ragas (melodic frameworks) and talas (rhythmic cycles). Students progress from sarali and janta varisais through varnams to kritis, developing the precise gamakas and sruti sense that define the style.',
   },
   {
     key: 'carnatic-mandolin',
@@ -130,6 +133,7 @@ export const INSTRUMENTS = [
     desc: 'The bright, plucked voice of South Indian classical music',
     highlights: ['Carnatic mandolin technique from the ground up', 'Classical repertoire adapted for a Western instrument', 'Weekday, weekend & online batches available'],
     genres: ['Varnams', 'Kritis', 'Filmy Fusion', 'Improvisation'],
+    about: 'The electric mandolin was brought into Carnatic music by U. Srinivas, and its bright, plucked tone has made it a favourite in concerts and fusion. Students learn to play gamakas and ragas on its fretted neck, working from the basics through to varnams, kritis and improvisation.',
   },
 ]
 
@@ -308,7 +312,6 @@ export const LIVE_BAND_EVENTS = [
 export const BLOG_POSTS = [
   {
     slug: 'why-chennai-families-choose-seven-swaras',
-    heroImage: HERO_IMAGES.classroom,
     tag: 'Our Story',
     title: 'Why Chennai Families Choose Seven Swaras Music Academy',
     excerpt: 'From a single classroom in 2014 to 500+ students across Chennai and 10+ countries online — here is the story behind our approach.',
@@ -323,7 +326,6 @@ export const BLOG_POSTS = [
   },
   {
     slug: 'keyboard-perfect-first-instrument-for-kids',
-    heroImage: instrumentHeroImage(INSTRUMENTS.find((i) => i.key === 'keyboard')),
     tag: 'Keyboard',
     title: '5 Reasons Keyboard Is the Perfect First Instrument for Kids',
     excerpt: 'Visual keys, instant feedback and a gentle learning curve make keyboard an ideal starting point for young beginners. Here is what to expect in the first month.',
@@ -339,7 +341,6 @@ export const BLOG_POSTS = [
   },
   {
     slug: 'acoustic-vs-electric-guitar-which-first',
-    heroImage: instrumentHeroImage(INSTRUMENTS.find((i) => i.key === 'guitar')),
     tag: 'Guitar',
     title: 'Acoustic vs Electric Guitar: Which Should You Learn First?',
     excerpt: 'Finger strength, music style and long-term goals all play a part in this decision. Here is a breakdown of the trade-offs for new students.',
@@ -355,7 +356,6 @@ export const BLOG_POSTS = [
   },
   {
     slug: 'bedroom-practice-to-stage-drums',
-    heroImage: instrumentHeroImage(INSTRUMENTS.find((i) => i.key === 'drums')),
     tag: 'Drums',
     title: 'From Bedroom Practice to the Stage: Learning Drums at Seven Swaras',
     excerpt: 'Dedicated practice rooms, structured progress checks and regular recitals — here is how our drum students go from their first beat to a live performance.',

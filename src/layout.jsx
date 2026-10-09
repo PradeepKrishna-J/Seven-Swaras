@@ -10,6 +10,54 @@ import {
   MapPinIcon, PhoneIcon, MailIcon, ClockIcon, GlobeIcon, NoteIcon,
 } from './icons.jsx'
 
+const GOOGLE_SHEETS_WEB_APP_URL = import.meta.env.VITE_GOOGLE_SHEETS_WEB_APP_URL
+const ACADEMY_TIME_ZONE = 'Asia/Kolkata'
+
+const BROWSER_TIME_ZONE = Intl.DateTimeFormat().resolvedOptions().timeZone || ACADEMY_TIME_ZONE
+const TIME_ZONES = (() => {
+  const zones = typeof Intl.supportedValuesOf === 'function' ? Intl.supportedValuesOf('timeZone') : []
+  return [...new Set([BROWSER_TIME_ZONE, ACADEMY_TIME_ZONE, ...zones])]
+})()
+
+// Minutes east of UTC for a zone at a given instant, e.g. +330 for Asia/Kolkata
+function tzOffsetMinutes(timeZone, date) {
+  const parts = Object.fromEntries(
+    new Intl.DateTimeFormat('en-US', {
+      timeZone, hourCycle: 'h23',
+      year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit',
+    }).formatToParts(date).map((p) => [p.type, p.value]),
+  )
+  const asUtc = Date.UTC(parts.year, parts.month - 1, parts.day, parts.hour, parts.minute, parts.second)
+  return Math.round((asUtc - date.getTime()) / 60000)
+}
+
+function formatGmtOffset(minutes) {
+  const sign = minutes < 0 ? '-' : '+'
+  const abs = Math.abs(minutes)
+  return `GMT${sign}${Math.floor(abs / 60)}${abs % 60 ? `:${String(abs % 60).padStart(2, '0')}` : ''}`
+}
+
+// Interprets a wall-clock date + time in the chosen zone and returns the exact instant
+function zonedTimeToDate(date, time, timeZone) {
+  const [y, m, d] = date.split('-').map(Number)
+  const [hh, mm] = time.split(':').map(Number)
+  const guess = new Date(Date.UTC(y, m - 1, d, hh, mm))
+  const first = new Date(guess.getTime() - tzOffsetMinutes(timeZone, guess) * 60000)
+  return new Date(guess.getTime() - tzOffsetMinutes(timeZone, first) * 60000)
+}
+
+// Opens the native date/time picker when the field is clicked anywhere, not just on its icon
+function openPicker(e) {
+  try { e.currentTarget.showPicker?.() } catch { /* unsupported or blocked — keep default behaviour */ }
+}
+
+function formatSlot(instant, timeZone) {
+  const text = new Intl.DateTimeFormat('en-IN', {
+    timeZone, weekday: 'short', day: 'numeric', month: 'short', year: 'numeric', hour: 'numeric', minute: '2-digit',
+  }).format(instant)
+  return `${text} (${timeZone}, ${formatGmtOffset(tzOffsetMinutes(timeZone, instant))})`
+}
+
 /* ------------------------------------------------------------------ */
 /* Navbar                                                               */
 /* ------------------------------------------------------------------ */
@@ -19,7 +67,7 @@ export function Navbar({ scrolled, onBookDemo, mobileOpen, setMobileOpen }) {
   const closeTimer = useRef(null)
   const location = useLocation()
 
-  useEffect(() => { setOpenMenu(null) }, [location.pathname])
+  useEffect(() => { setOpenMenu(null) }, [location.pathname, location.hash])
   useEffect(() => () => clearTimeout(closeTimer.current), [])
 
   const openNow = (to) => {
@@ -178,6 +226,7 @@ export function Footer({ onBookDemo }) {
 
       <div className="ssma-footer-bottom">
         <p>© 2025 Seven Swaras Music Academy. All rights reserved. | Made in Chennai</p>
+        <p className="ssma-footer-credit">Instrument icons by <a href="https://game-icons.net" target="_blank" rel="noreferrer">game-icons.net</a> (CC BY 3.0)</p>
         <p><a href="#">Privacy Policy</a> · <a href="#">Terms of Use</a></p>
       </div>
     </footer>
@@ -209,11 +258,13 @@ export function WhatsAppFloat() {
 
 export function DemoModal({ open, onClose, presetInstrument }) {
   const emptyForm = {
-    name: '', mobile: '', email: '', instrument: '', date: '', timeSlot: '',
+    name: '', mobile: '', email: '', instrument: '', date: '', time: '', timeZone: BROWSER_TIME_ZONE,
   }
   const [formData, setFormData] = useState(emptyForm)
   const [errors, setErrors] = useState({})
   const [submitted, setSubmitted] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState('')
   const today = new Date().toISOString().slice(0, 10)
 
   useEffect(() => {
@@ -221,6 +272,8 @@ export function DemoModal({ open, onClose, presetInstrument }) {
       setFormData({ ...emptyForm, instrument: presetInstrument || '' })
       setErrors({})
       setSubmitted(false)
+      setSubmitError('')
+      setIsSubmitting(false)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open, presetInstrument])
@@ -235,21 +288,55 @@ export function DemoModal({ open, onClose, presetInstrument }) {
 
   const update = (field) => (e) => setFormData((f) => ({ ...f, [field]: e.target.value }))
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     const nextErrors = {}
     if (!formData.name.trim()) nextErrors.name = 'Please enter your name'
-    if (!/^\d{10}$/.test(formData.mobile.trim())) nextErrors.mobile = 'Enter a valid 10-digit number'
+    if (!/^\+?[\d\s-]{7,16}$/.test(formData.mobile.trim())) nextErrors.mobile = 'Enter a valid phone number'
     if (!formData.instrument) nextErrors.instrument = 'Please choose an instrument'
     if (!formData.date) nextErrors.date = 'Please choose a date'
-    if (!formData.timeSlot) nextErrors.timeSlot = 'Please choose a time slot'
+    if (!formData.time) nextErrors.time = 'Please choose a time'
+    if (!formData.timeZone) nextErrors.timeZone = 'Please choose your time zone'
 
     if (Object.keys(nextErrors).length > 0) {
       setErrors(nextErrors)
       return
     }
-    console.log(formData)
-    setSubmitted(true)
+
+    if (!GOOGLE_SHEETS_WEB_APP_URL) {
+      setSubmitError('Booking is temporarily unavailable. Please contact us on WhatsApp.')
+      return
+    }
+
+    setIsSubmitting(true)
+    setSubmitError('')
+    try {
+      const slot = zonedTimeToDate(formData.date, formData.time, formData.timeZone)
+      // Every value is a plain string so each lands in the sheet exactly as shown here
+      const booking = {
+        name: formData.name.trim(),
+        mobile: formData.mobile.trim(),
+        email: formData.email.trim(),
+        instrument: formData.instrument,
+        preferredSlot: formatSlot(slot, formData.timeZone),
+        preferredSlotIST: formatSlot(slot, ACADEMY_TIME_ZONE),
+        timeZone: formData.timeZone,
+        source: window.location.href,
+        submittedAt: new Date().toISOString(),
+      }
+      // text/plain keeps this a "simple" request, so Apps Script accepts it without a CORS preflight
+      await fetch(GOOGLE_SHEETS_WEB_APP_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(booking),
+      })
+      setSubmitted(true)
+    } catch {
+      setSubmitError('We could not submit your request. Please try again or contact us on WhatsApp.')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -280,7 +367,7 @@ export function DemoModal({ open, onClose, presetInstrument }) {
 
                 <label>
                   Mobile Number *
-                  <input type="tel" placeholder="10-digit mobile number" value={formData.mobile} onChange={update('mobile')} className={errors.mobile ? 'has-error' : ''} />
+                  <input type="tel" placeholder="Mobile number with country code" value={formData.mobile} onChange={update('mobile')} className={errors.mobile ? 'has-error' : ''} />
                   {errors.mobile && <span className="ssma-error">{errors.mobile}</span>}
                 </label>
 
@@ -300,24 +387,27 @@ export function DemoModal({ open, onClose, presetInstrument }) {
 
                 <label>
                   Preferred Date *
-                  <input type="date" min={today} value={formData.date} onChange={update('date')} className={errors.date ? 'has-error' : ''} />
+                  <input type="date" min={today} value={formData.date} onChange={update('date')} onClick={openPicker} className={errors.date ? 'has-error' : ''} />
                   {errors.date && <span className="ssma-error">{errors.date}</span>}
                 </label>
 
                 <label>
-                  Preferred Time Slot *
-                  <select value={formData.timeSlot} onChange={update('timeSlot')} className={errors.timeSlot ? 'has-error' : ''}>
-                    <option value="" disabled>Select a time slot</option>
-                    <option>Morning 8:00–10:00 AM</option>
-                    <option>Midday 11:00 AM–1:00 PM</option>
-                    <option>Evening 5:00–7:00 PM</option>
-                    <option>Evening 7:00–9:00 PM</option>
-                  </select>
-                  {errors.timeSlot && <span className="ssma-error">{errors.timeSlot}</span>}
+                  Preferred Time *
+                  <input type="time" value={formData.time} onChange={update('time')} onClick={openPicker} className={errors.time ? 'has-error' : ''} />
+                  {errors.time && <span className="ssma-error">{errors.time}</span>}
                 </label>
 
-                <button type="submit" className="ssma-btn ssma-btn-amber ssma-btn-full ssma-submit-btn">
-                  Reserve My Free Class →
+                <label className="ssma-form-full">
+                  Your Time Zone *
+                  <select value={formData.timeZone} onChange={update('timeZone')} className={errors.timeZone ? 'has-error' : ''}>
+                    {TIME_ZONES.map((tz) => <option key={tz} value={tz}>{tz.replace(/_/g, ' ')}</option>)}
+                  </select>
+                  {errors.timeZone && <span className="ssma-error">{errors.timeZone}</span>}
+                </label>
+
+                {submitError && <p className="ssma-error ssma-submit-error" role="alert">{submitError}</p>}
+                <button type="submit" className="ssma-btn ssma-btn-amber ssma-btn-full ssma-submit-btn" disabled={isSubmitting}>
+                  {isSubmitting ? 'Sending your request…' : 'Reserve My Free Class →'}
                 </button>
               </form>
             </>

@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom'
 import { BLOG_POSTS } from '../data.js'
 import { Breadcrumbs } from '../components/Breadcrumbs.jsx'
 import { PageHero } from '../components/PageHero.jsx'
-import { HERO_IMAGES } from '../heroImages.js'
 import { useSeo } from '../useSeo.js'
 
 export default function BlogListPage() {
@@ -16,7 +15,6 @@ export default function BlogListPage() {
       <Breadcrumbs items={[{ label: 'Home', to: '/' }, { label: 'Blog' }]} />
 
       <PageHero
-        image={HERO_IMAGES.classroom}
         eyebrow="Blog"
         title="From Our Blog"
         subtitle="Notes on our academy and the instruments we offer."

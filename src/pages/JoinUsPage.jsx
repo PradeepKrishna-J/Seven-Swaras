@@ -2,7 +2,6 @@ import { Link, useOutletContext } from 'react-router-dom'
 import { CheckIcon } from '../icons.jsx'
 import { Breadcrumbs } from '../components/Breadcrumbs.jsx'
 import { PageHero } from '../components/PageHero.jsx'
-import { HERO_IMAGES } from '../heroImages.js'
 import { useSeo } from '../useSeo.js'
 
 export default function JoinUsPage() {
@@ -18,7 +17,6 @@ export default function JoinUsPage() {
       <Breadcrumbs items={[{ label: 'Home', to: '/' }, { label: 'Resources', to: '/resources' }, { label: 'Join Us' }]} />
 
       <PageHero
-        image={HERO_IMAGES.practice}
         eyebrow="Resources"
         title="Join Us"
         subtitle="Starting is simple — here is exactly what to expect from your first free demo class onward."

@@ -1,7 +1,6 @@
 import { Link, useOutletContext } from 'react-router-dom'
 import { Breadcrumbs } from '../components/Breadcrumbs.jsx'
 import { PageHero } from '../components/PageHero.jsx'
-import { HERO_IMAGES } from '../heroImages.js'
 import { useSeo } from '../useSeo.js'
 
 const STEPS = [
@@ -40,7 +39,6 @@ export default function HowItWorksPage() {
       <Breadcrumbs items={[{ label: 'Home', to: '/' }, { label: 'Resources', to: '/resources' }, { label: 'How It Works' }]} />
 
       <PageHero
-        image={HERO_IMAGES.classroom}
         eyebrow="Resources"
         title="How It Works"
         subtitle="From your first enquiry to your first recital, here is exactly what to expect."

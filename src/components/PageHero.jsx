@@ -1,6 +1,6 @@
-export function PageHero({ image, eyebrow, title, subtitle, children }) {
+export function PageHero({ eyebrow, title, subtitle, children }) {
   return (
-    <section className="ssma-page-hero" style={{ backgroundImage: `linear-gradient(180deg, rgba(30,27,75,0.55), rgba(30,27,75,0.78)), url(${image})` }}>
+    <section className="ssma-page-hero">
       <div className="ssma-page-hero-inner">
         {eyebrow && <p className="ssma-eyebrow ssma-page-hero-eyebrow">{eyebrow}</p>}
         <h1 className="ssma-page-hero-title">{title}</h1>

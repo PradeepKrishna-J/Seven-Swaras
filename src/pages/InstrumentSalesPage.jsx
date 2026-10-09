@@ -3,7 +3,6 @@ import { SALE_ITEMS } from '../data.js'
 import { CheckIcon, WhatsAppIcon, InstrumentIcon } from '../icons.jsx'
 import { Breadcrumbs } from '../components/Breadcrumbs.jsx'
 import { PageHero } from '../components/PageHero.jsx'
-import { HERO_IMAGES } from '../heroImages.js'
 import { useSeo } from '../useSeo.js'
 
 const WA_NUMBER = '919361623134'
@@ -27,7 +26,6 @@ export default function InstrumentSalesPage() {
       <Breadcrumbs items={[{ label: 'Home', to: '/' }, { label: 'Instrument Sales' }]} />
 
       <PageHero
-        image={HERO_IMAGES.classroom}
         eyebrow="Instrument Sales"
         title="Get the Right Instrument to Start"
         subtitle="Buy or rent a beginner-to-intermediate instrument through Seven Swaras, with guidance on the right pick for your level and budget."
