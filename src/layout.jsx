@@ -258,7 +258,7 @@ export function WhatsAppFloat() {
 
 export function DemoModal({ open, onClose, presetInstrument }) {
   const emptyForm = {
-    name: '', mobile: '', email: '', instrument: '', date: '', time: '', timeZone: BROWSER_TIME_ZONE,
+    name: '', mobile: '', email: '', instrument: '', date: '', time: '', timeZone: BROWSER_TIME_ZONE, website: '',
   }
   const [formData, setFormData] = useState(emptyForm)
   const [errors, setErrors] = useState({})
@@ -324,15 +324,20 @@ export function DemoModal({ open, onClose, presetInstrument }) {
         source: window.location.href,
         submittedAt: new Date().toISOString(),
       }
-      // text/plain keeps this a "simple" request, so Apps Script accepts it without a CORS preflight
-      await fetch(GOOGLE_SHEETS_WEB_APP_URL, {
+      // text/plain keeps this a "simple" request, so Apps Script accepts it without a CORS preflight.
+      // Apps Script redirects to a CORS-enabled URL, so the script's JSON reply is readable here.
+      const send = () => fetch(GOOGLE_SHEETS_WEB_APP_URL, {
         method: 'POST',
-        mode: 'no-cors',
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify(booking),
-      })
+        body: JSON.stringify({ ...booking, website: formData.website }),
+      }).then((res) => res.json())
+      // Apps Script occasionally answers with an HTML error page; one retry is safe
+      // because the script returns the existing booking instead of adding a duplicate row
+      const result = await send().catch(send)
+      if (!result.ok) throw new Error(result.error)
       setSubmitted(true)
-    } catch {
+    } catch (err) {
+      console.error('Demo booking failed:', err)
       setSubmitError('We could not submit your request. Please try again or contact us on WhatsApp.')
     } finally {
       setIsSubmitting(false)
@@ -404,6 +409,9 @@ export function DemoModal({ open, onClose, presetInstrument }) {
                   </select>
                   {errors.timeZone && <span className="ssma-error">{errors.timeZone}</span>}
                 </label>
+
+                {/* Spam trap: hidden from people, filled in by bots */}
+                <input type="text" name="website" value={formData.website} onChange={update('website')} tabIndex={-1} autoComplete="off" aria-hidden="true" style={{ position: 'absolute', left: '-9999px' }} />
 
                 {submitError && <p className="ssma-error ssma-submit-error" role="alert">{submitError}</p>}
                 <button type="submit" className="ssma-btn ssma-btn-amber ssma-btn-full ssma-submit-btn" disabled={isSubmitting}>

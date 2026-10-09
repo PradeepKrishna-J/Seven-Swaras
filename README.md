@@ -2,65 +2,39 @@
 
 ## Google Sheets demo bookings
 
-The “Book Your Free Demo Class” popup sends each booking to a Google Apps
-Script web app as a JSON string. Every value is a plain string. Copy
-`.env.example` to `.env.local` and set `VITE_GOOGLE_SHEETS_WEB_APP_URL` to the
-deployed web app URL.
+The “Book Your Free Demo Class” popup posts each booking as JSON to a Google
+Apps Script web app, which appends a row to the `Demo Bookings` tab of a Google
+Sheet. The script lives in [`apps-script/Code.gs`](apps-script/Code.gs).
 
-Visitors choose any date and time plus their own time zone. The browser's zone
-is selected by default. Each row stores the slot in the visitor's zone and the
-same moment converted to IST.
+The script checks required fields and phone/email format, ignores bots that fill
+the hidden `website` field, and returns the existing booking ID instead of a
+duplicate row when the same phone and slot arrive twice within 10 minutes. It
+replies with `{ ok, bookingId }` or `{ ok: false, error }`, and the popup shows
+“You're booked!” only after a successful reply.
 
-Create a Google Sheet, then add this Apps Script (`Extensions` → `Apps Script`).
-The `Demo Bookings` tab and its header row are created on the first booking:
+Each row stores: Booking ID, Received At (IST), Name, Mobile, Email, Instrument,
+the slot in the visitor's time zone and in IST, the visitor's time zone, the
+page and the submission time (UTC). Every cell is plain text.
 
-```js
-const SHEET_NAME = 'Demo Bookings';
-const COLUMNS = [
-  ['receivedAt', 'Received At'],
-  ['name', 'Name'],
-  ['mobile', 'Mobile'],
-  ['email', 'Email'],
-  ['instrument', 'Instrument'],
-  ['preferredSlot', 'Preferred Slot (visitor time zone)'],
-  ['preferredSlotIST', 'Preferred Slot (IST)'],
-  ['timeZone', 'Visitor Time Zone'],
-  ['source', 'Page'],
-  ['submittedAt', 'Submitted At (UTC)'],
-];
+### Setup
 
-function doPost(e) {
-  const lock = LockService.getScriptLock();
-  lock.waitLock(10000);
-  try {
-    const ss = SpreadsheetApp.getActiveSpreadsheet();
-    const sheet = ss.getSheetByName(SHEET_NAME) || ss.insertSheet(SHEET_NAME);
-    if (sheet.getLastRow() === 0) {
-      sheet.appendRow(COLUMNS.map(([, label]) => label));
-      sheet.setFrozenRows(1);
-    }
+1. Create a new Google Sheet (for example “Seven Swaras – Demo Bookings”).
+2. In the sheet, open `Extensions` → `Apps Script`. Replace the contents of
+   `Code.gs` with [`apps-script/Code.gs`](apps-script/Code.gs) and save.
+3. Select the `setup` function and click `Run`. Approve the permission prompt
+   (choose your account → `Advanced` → `Go to … (unsafe)` → `Allow`). This
+   creates the `Demo Bookings` tab and its header row.
+4. Click `Deploy` → `New deployment` → gear icon → `Web app`. Set
+   “Execute as: **Me**” and “Who has access: **Anyone**”, then `Deploy`.
+5. Copy the web app URL (ending in `/exec`). Opening it in a browser should
+   show `{"ok":true,"service":"seven-swaras-demo-bookings"}`.
+6. Set `VITE_GOOGLE_SHEETS_WEB_APP_URL` to that URL in `.env.local` for local
+   development and in Vercel (`Settings` → `Environment Variables`) for
+   production, then redeploy the site.
 
-    const data = JSON.parse(e.postData.contents);
-    data.receivedAt = Utilities.formatDate(new Date(), 'Asia/Kolkata', 'yyyy-MM-dd HH:mm:ss') + ' IST';
-
-    // Write as plain text so Sheets never reformats phone numbers or dates
-    const row = COLUMNS.map(([key]) => String(data[key] ?? ''));
-    const range = sheet.getRange(sheet.getLastRow() + 1, 1, 1, row.length);
-    range.setNumberFormat('@').setValues([row]);
-
-    return ContentService
-      .createTextOutput(JSON.stringify({ ok: true }))
-      .setMimeType(ContentService.MimeType.JSON);
-  } finally {
-    lock.releaseLock();
-  }
-}
-```
-
-Deploy it as a web app (`Deploy` → `New deployment` → `Web app`) with
-“Execute as: Me” and “Who has access: Anyone”. The sheet owner is asked to
-authorize the script once. After any change to the script, deploy a new version
-for the change to take effect.
+After changing the script, use `Deploy` → `Manage deployments` → edit (pencil)
+→ Version: `New version` → `Deploy`. This keeps the same URL; creating a new
+deployment instead gives a new URL that must be updated in the env variable.
 
 This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
 
